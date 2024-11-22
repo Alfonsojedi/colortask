@@ -18,7 +18,7 @@ export default function HomeScreen() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Colortask</ThemedText>
         <HelloWave />
-        <ThemedText> Esta app está en pre-alpha</ThemedText>
+        <ThemedText>Esta app está en pre-alpha</ThemedText>
       </ThemedView>
       
       <ThemedView style={styles.stepContainer}>
