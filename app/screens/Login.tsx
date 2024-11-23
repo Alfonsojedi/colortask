@@ -1,15 +1,52 @@
-import { View, StyleSheet, TextInput } from 'react-native';
+import { View, StyleSheet, TextInput, Button, ActivityIndicator, KeyboardAvoidingView } from 'react-native';
 import React, { useState} from 'react';
 import { fire_auth } from '@/FirebaseConf';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
 
 const Login = () => {
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
   const [loading,setLoading] = useState(false);
   const auth = fire_auth;
+
+  const signIn = async () => {
+    setLoading(true);
+    try{
+      const response = await signInWithEmailAndPassword(auth,email,password);
+      console.log(response);
+      alert('Por favor, compruebe su email.')
+    }catch (error){
+      console.log(error);
+      alert('Hubo un error al entrar. Compruebe sus datos:\n'+error)
+    }finally{
+      setLoading(false);
+    }
+  }
+  const signUp = async () => {
+    setLoading(true);
+    try{
+      const response = await createUserWithEmailAndPassword(auth, email,password);
+      console.log(response)
+    }catch (error){
+      console.log(error);
+      alert('Hubo un error al registrarse. Compruebe sus datos:\n'+error)
+    }finally{
+      setLoading(false);
+    }
+  }
   return(
   <View style={styles.container}>
-    <TextInput value={email} style={styles.input} onChangeText={(text) => setEmail(text)}></TextInput>
+    <KeyboardAvoidingView behavior='padding'>
+    <TextInput value={email} style={styles.input} placeholder='E-mail' onChangeText={(text) => setEmail(text)}></TextInput>
+    <TextInput secureTextEntry={true} value={password} style={styles.input} placeholder='Contraseña' autoCapitalize='none' onChangeText={(text) => setPassword(text)}></TextInput>
+    {loading ? 
+      <ActivityIndicator size="large" color="#ff8800"></ActivityIndicator>
+      :
+      <>
+        <Button title='Acceder' onPress={signIn}></Button>
+        <Button title='Regístrate' onPress={signUp}></Button>
+      </>}
+    </KeyboardAvoidingView>
   </View>
   )
 }
