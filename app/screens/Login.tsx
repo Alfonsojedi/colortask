@@ -43,8 +43,8 @@ const Login = () => {
       <ActivityIndicator size="large" color="#ff8800"></ActivityIndicator>
       :
       <>
-        <Button title='Acceder' onPress={signIn}></Button>
-        <Button title='Regístrate' onPress={signUp}></Button>
+        <Button title='Acceder' color={styles.button.color} onPress={signIn}></Button>
+        <Button title='Regístrate' color={styles.button.color} onPress={signUp}></Button>
       </>}
     </KeyboardAvoidingView>
   </View>
@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: 20,
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    width: '80%',
   },
   input: {
     marginVertical: 4,
@@ -63,7 +64,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     padding: 10,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+  },
+  button: {
+    color: '#f84',
+    margin: 10,
+    width: '40%',
   }
 });
 
