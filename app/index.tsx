@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import Login from './screens/Login';
 import List from './screens/List';
-import Details from './screens/Tasks';
+import Tasks from './screens/Tasks';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { fire_auth } from '@/FirebaseConf';
 
@@ -15,7 +15,7 @@ function InsideLayout() {
   return(
       <InsideStack.Navigator>
         <InsideStack.Screen name="To do" component={List}></InsideStack.Screen>
-        <InsideStack.Screen name="Details" component={Details}></InsideStack.Screen>
+        <InsideStack.Screen name="Tasks" component={Tasks}></InsideStack.Screen>
       </InsideStack.Navigator>
   )
 }
