@@ -1,4 +1,4 @@
-import { View, StyleSheet, TextInput, Button, ActivityIndicator, KeyboardAvoidingView } from 'react-native';
+import { View, StyleSheet, Text, TextInput, Button, ActivityIndicator, KeyboardAvoidingView } from 'react-native';
 import React, { useState} from 'react';
 import { fire_auth } from '@/FirebaseConf';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
@@ -37,6 +37,7 @@ const Login = () => {
   return(
   <View style={styles.container}>
     <KeyboardAvoidingView behavior='padding'>
+    <Text style={styles.title}>Colortask</Text>
     <TextInput value={email} style={styles.input} placeholder='E-mail' onChangeText={(text) => setEmail(text)}></TextInput>
     <TextInput secureTextEntry={true} value={password} style={styles.input} placeholder='Contraseña' autoCapitalize='none' onChangeText={(text) => setPassword(text)}></TextInput>
     {loading ? 
@@ -44,6 +45,7 @@ const Login = () => {
       :
       <>
         <Button title='Acceder' color={styles.button.color} onPress={signIn}></Button>
+        <View style={styles.gap}></View>
         <Button title='Regístrate' color={styles.button.color} onPress={signUp}></Button>
       </>}
     </KeyboardAvoidingView>
@@ -56,7 +58,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     flex: 1,
     justifyContent: 'center',
-    width: '80%',
+    alignItems: 'center',
+    width: '95%',
   },
   input: {
     marginVertical: 4,
@@ -70,6 +73,15 @@ const styles = StyleSheet.create({
     color: '#f84',
     margin: 10,
     width: '40%',
+  },
+  title: {
+    color: '#f84',
+    fontWeight: 'bold',
+    fontSize: 40,
+    textAlign: 'center',
+  },
+  gap: {
+    height: 10,
   }
 });
 
