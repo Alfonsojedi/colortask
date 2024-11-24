@@ -10,13 +10,16 @@ const Tasks = () => {
             <View style={styles.tasksPage}>
                 <View style={styles.profile}>
                     <View style={styles.lista}>
-                        <Text style={styles.taskText}>Lista de tareas</Text>
+                        <Text style={styles.taskTitle}>Lista de tareas</Text>
                         <Text style={styles.taskText}>Tareas a completar</Text>
                     </View>
                 </View>
                 <TouchableOpacity>
                     <Image source={require("@/assets/images/bell.png")} style={styles.notificar}></Image>
                 </TouchableOpacity>
+            </View>
+            <View style={styles.calendar}>
+                
             </View>
         </View>
     )
@@ -27,13 +30,19 @@ export default Tasks;
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: 'center',
     },
     tasksPage: {
-        backgroundColor: '#F84'
+        backgroundColor: '#F84',
+        paddingHorizontal: 4,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingTop: 10,
+        paddingBottom: 20,
+        alignItems: 'center',
     },
     profile: {
-
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     lista: {
 
@@ -42,8 +51,17 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
     },
+    taskTitle: {
+        color: '#FFF',
+        fontSize: 24,
+        fontWeight: 'bold',
+    },
     taskText: {
         color: '#FFF',
         fontSize: 16,
-    }
+        fontWeight: 'bold',
+    },
+    calendar:{
+        flex: 1,
+    },
   });
