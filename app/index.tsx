@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import Login from './screens/Login';
 import List from './screens/List';
-import Details from './screens/Details';
+import Details from './screens/Tasks';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { fire_auth } from '@/FirebaseConf';
 

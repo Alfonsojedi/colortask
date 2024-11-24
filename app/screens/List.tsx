@@ -11,7 +11,7 @@ interface RouterProps {
 const List = ({ navigation} : RouterProps) => {
     return(
         <View style={styles.container}>
-            <Button title='Abrir detalles' color={styles.button.color} onPress={() => navigation.navigate('details')}></Button>
+            <Button title='Abrir tareas' color={styles.button.color} onPress={() => navigation.navigate('Tasks')}></Button>
             <Button title='Cerrar sesión' color={styles.button.color} onPress={() => fire_auth.signOut()}></Button>
         </View>
     )
