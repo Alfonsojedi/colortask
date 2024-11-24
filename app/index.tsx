@@ -13,12 +13,10 @@ const InsideStack = createNativeStackNavigator();
 
 function InsideLayout() {
   return(
-    <NavigationContainer>
       <InsideStack.Navigator>
         <InsideStack.Screen name="To do" component={List}></InsideStack.Screen>
         <InsideStack.Screen name="Details" component={Details}></InsideStack.Screen>
       </InsideStack.Navigator>
-    </NavigationContainer>
   )
 }
 
