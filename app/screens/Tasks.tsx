@@ -10,8 +10,8 @@ const Tasks = () => {
             <View style={styles.tasksPage}>
                 <View style={styles.profile}>
                     <View style={styles.lista}>
-                        <Text>Lista de tareas</Text>
-                        <Text>Tareas a completar</Text>
+                        <Text style={styles.taskText}>Lista de tareas</Text>
+                        <Text style={styles.taskText}>Tareas a completar</Text>
                     </View>
                 </View>
                 <TouchableOpacity>
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
     tasksPage: {
-
+        backgroundColor: '#F84'
     },
     profile: {
 
@@ -41,5 +41,9 @@ const styles = StyleSheet.create({
     notificar: {
         width: 40,
         height: 40,
+    },
+    taskText: {
+        color: '#FFF',
+        fontSize: 16,
     }
   });
