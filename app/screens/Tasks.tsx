@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 import Task from '@/components/Task';
+import { Agenda, CalendarTheme } from 'react-native-calendars';
 
 const Tasks = () => {
     const [items, setItems] = useState('');
@@ -19,7 +20,15 @@ const Tasks = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.calendar}>
-                
+                <View style={styles.calendario}>
+                    <Agenda
+                    items={items}
+                    theme={"customTheme"}
+                    showOnlySelectedDayItems={true}
+                    >
+
+                    </Agenda>
+                </View>
             </View>
         </View>
     )
@@ -62,6 +71,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     calendar:{
+        flex: 1,
+    },
+    calendario:{
         flex: 1,
     },
   });
