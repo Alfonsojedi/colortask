@@ -68,15 +68,37 @@ const FetchData = () => {
     return(
         <View>
             <Text>Tareas Añadidas</Text>
-            {todoData.map((item,index) => {
+            {todoData.map((tasks,index) => {
                 return( 
-                    <View key={index}> 
-                        <Text>{item.name}</Text>
-                        <Text>{item.desc}</Text>
-                        <Text>{item.done}</Text>
-                        <Text>{item.colors}</Text>
-                        <Text>{item.prior}</Text>
-                        <Text>{item.date}</Text>
+                    <View style={ColorPick(tasks.colors)}>
+                        <View style={styles.taskLeft}>
+                            <View style={Check(tasks.done)}></View>
+                        </View>
+                        <View style={styles.taskRight}>
+                            <TaskText stroke={1} color='#fff'>
+                                <Text style={{fontSize: 20,color: '#000'}}>{tasks.name}</Text>
+                            </TaskText>
+                            <TaskText stroke={1} color='#fff'>
+                                <Text style={{fontSize: 12,color: '#000'}}>{tasks.desc}</Text>
+                            </TaskText>
+                            <TaskText stroke={1} color='#000'>
+                                <Text style={{fontSize: 16,color: '#e21'}}>{tasks.prior}</Text>
+                            </TaskText>
+                            <TaskText stroke={1} color='#000'>
+                                <Text style={{fontSize: 16,color: '#e21'}}>{tasks.date}</Text>
+                            </TaskText>
+                            <TaskText stroke={1} color='#000'>
+                                <Text style={{fontSize: 16,color: '#e21'}}>{tasks.colors}</Text>
+                            </TaskText>
+                        </View>
+                        <View style={styles.taskButtons}>
+                            <TouchableOpacity style={{marginRight: 5}}>
+                                <Image source={require("@/assets/images/Delete.svg")}></Image>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={{marginRight: 5}}>
+                                <Image source={require("@/assets/images/Edit.svg")}></Image>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 )
             })}
