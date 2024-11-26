@@ -105,15 +105,15 @@ const FetchData = () => {
         </View>
 )
 }
-const pruebas = {
+/*const pruebas = {
     '2024-11-24': [],
     '2024-11-25': [{name: 'item 3 - any js object', colors: ['#fff'], desc: 'tareas' , done: true}],
     '2024-11-26': [{name: 'Diseñando task', desc: 'Algo', done: true , colors: ['#08f','#848','#344'], prior: 1}, {name: 'any js object', colors: ['#f31'], done: true},{name: '3º task', colors: [], done: false}],
     '2024-11-27': [{name: 'Unir con BBDD', colors: [], done: false}],
     '2024-11-28': [{name: 'Crear add/edit', colors: [], desc: 'tareas' , done: false}],
-}
+}*/
 const Tasks = ({ navigation} : RouterProps) => {
-    const [items, setItems] = useState(pruebas);
+    const [items, setItems] = useState('');
 
     return(
         <View style={styles.container}>
