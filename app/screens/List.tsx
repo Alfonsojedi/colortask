@@ -13,6 +13,7 @@ const List = ({ navigation} : RouterProps) => {
         <View style={styles.container}>
             <Text style={{fontSize: 40, fontWeight: 'bold', marginBottom: 40}}>Bienvenido</Text>
             <Button title='Abrir tareas' color={'#f84'} onPress={() => navigation.navigate('Tasks')}></Button>
+            <Button title='Añadir tareas' color={'#f84'} onPress={() => navigation.navigate('Add')}></Button>
             <Button title='Cerrar sesión' color={'#f84'} onPress={() => fire_auth.signOut()}></Button>
         </View>
     )

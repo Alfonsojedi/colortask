@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, Button } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Button, TextInput } from 'react-native';
 import Task from '@/components/Task';
 import { Agenda } from 'react-native-calendars';
 import ColorBox from '@/components/ColorBox';
 import { NavigationProp } from '@react-navigation/native';
 import { fire_auth } from '@/FirebaseConf';
 import { TaskText } from '@/components/TaskText';
-/*
-LocaleConfig.locales['es']= {
-    dayNamesShort: ['L','M','X','J','V','S','D'],
+
+interface RouterProps {
+    navigation: NavigationProp<any, any>;
 }
-*/
 const customTheme = {
     agendaTodayColor: '#f88',
     agendaKnobColor: '#f64',
@@ -56,7 +55,7 @@ const pruebas = {
     '2024-11-27': [{name: 'Unir con BBDD', colors: [], done: false}],
     '2024-11-28': [{name: 'Crear add/edit', colors: [], desc: 'tareas' , done: false}],
 }
-const Tasks = () => {
+const Tasks = ({ navigation} : RouterProps) => {
     const [items, setItems] = useState(pruebas);
     return(
         <View style={styles.container}>
@@ -110,7 +109,7 @@ const Tasks = () => {
             <View style={styles.cerrar}>
                 <Button title='Cerrar sesión' color={'#f84'} onPress={() => fire_auth.signOut()}></Button>
             </View>
-            <TouchableOpacity style={styles.add} onPress={() => navigation.navigate('Tasks')}>
+            <TouchableOpacity style={styles.add} onPress={() => navigation.navigate('Add')}>
                 <Image source={require("@/assets/images/add.svg")}></Image>
             </TouchableOpacity>
         </View>

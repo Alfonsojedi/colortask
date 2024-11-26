@@ -44,7 +44,6 @@ const Login = () => {
       :
       <>
         <Button title='Acceder' color={'#f84'} onPress={signIn}></Button>
-        <View style={styles.gap}></View>
         <Button title='Regístrate' color={'#f84'} onPress={signUp}></Button>
       </>}
     </KeyboardAvoidingView>
@@ -79,9 +78,6 @@ const styles = StyleSheet.create({
     fontSize: 40,
     textAlign: 'center',
   },
-  gap: {
-    height: 10,
-  }
 });
 
 export default Login;
