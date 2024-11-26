@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import {getAuth} from "firebase/auth";
-import {getFirestore} from "firebase/firestore";
+import {getStorage} from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -10,6 +10,7 @@ import {getFirestore} from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyDIJ2ydH2s22KB-_fzMcTpvdWFl-4bxetQ",
   authDomain: "colortask-40e10.firebaseapp.com",
+  databaseURL: "https://colortask-40e10-default-rtdb.europe-west1.firebasedatabase.app/",
   projectId: "colortask-40e10",
   storageBucket: "colortask-40e10.firebasestorage.app",
   messagingSenderId: "393291527855",
@@ -20,3 +21,4 @@ const firebaseConfig = {
 // Initialize Firebase
 export const fire_app = initializeApp(firebaseConfig);
 export const fire_auth = getAuth(fire_app);
+export const fire_storage = getStorage(fire_app);

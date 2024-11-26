@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import React from 'react';
 import Task from '@/components/Task';
 import { Agenda } from 'react-native-calendars';
 import ColorBox from '@/components/ColorBox';
+import { NavigationProp } from '@react-navigation/native';
 /*
 LocaleConfig.locales['es']= {
     dayNamesShort: ['L','M','X','J','V','S','D'],
@@ -14,6 +14,20 @@ const customTheme = {
     agendaKnobColor: '#f64',
     selectedDayBackgroundColor: '#f84',
     dotColor: '#f84',
+}
+const Check = (done=false) => {
+    let color='#f21';
+    if(done){
+        color='#0d4';
+    }
+    return ({
+        borderColor: color,
+        borderWidth: 3,
+        borderRadius: 20,
+        flexDirection: 'row',
+        width: 30,
+        height: 30,
+    })
 }
 const ColorPick = (colores='#888') => {
     return ({
@@ -36,10 +50,10 @@ const SinTareas = () => {
 const Tasks = () => {
     const [items, setItems] = useState({
         '2024-11-24': [],
-        '2024-11-25': [{name: 'item 3 - any js object', colors: ['#fff'], desc: 'tareas'}],
-        '2024-11-26': [{name: 'item 3 - any js object', desc: 'Algo' , colors: ['#fff','#848','#344']}, {name: 'any js object', colors: ['#f75']},{name: 'item 1 - any js object', colors: []}],
+        '2024-11-25': [{name: 'item 3 - any js object', colors: ['#fff'], desc: 'tareas' , done: true}],
+        '2024-11-26': [{name: 'item 3 - any js object', desc: 'Algo', done: true , colors: ['#fff','#848','#344']}, {name: 'any js object', colors: ['#f75'], done: true},{name: 'item 1 - any js object', colors: [], done: false}],
         '2024-11-27': [{name: 'item 1 - any js object', colors: []}],
-        '2024-11-23': [{name: 'item 2 - any js object', desc: 'tareas'}],
+        '2024-11-23': [{name: 'item 2 - any js object', desc: 'tareas' , done: true}],
       });
     return(
         <View style={styles.container}>
@@ -64,7 +78,9 @@ const Tasks = () => {
                     renderItem={(tasks) => (
                         <View style={ColorPick(tasks.colors[0])}>
                             <View style={styles.taskLeft}>
-                                <Text>0/1</Text>
+                                <View style={Check(tasks.done)}>
+
+                                </View>
                             </View>
                             <View style={styles.taskRight}>
                                 <ColorBox colores={tasks.colors}></ColorBox>
@@ -74,10 +90,10 @@ const Tasks = () => {
                             </View>
                             <View style={styles.taskButtons}>
                                 <TouchableOpacity>
-                                    <Image source={require("@/assets/images/bell.svg")}></Image>
+                                    <Image source={require("@/assets/images/Delete.svg")}></Image>
                                 </TouchableOpacity>
                                 <TouchableOpacity>
-                                    <Image source={require("@/assets/images/bell.svg")}></Image>
+                                    <Image source={require("@/assets/images/Edit.svg")}></Image>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -86,7 +102,7 @@ const Tasks = () => {
                     </Agenda>
                 </View>
             </View>
-            <TouchableOpacity style={styles.add}>
+            <TouchableOpacity style={styles.add} onPress={() => navigation.navigate('Tasks')}>
                 <Image source={require("@/assets/images/add.svg")}></Image>
             </TouchableOpacity>
         </View>
@@ -139,7 +155,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fec',
     },
     taskLeft: {
-        width: 60,
+        width: 50,
         backgroundColor: '#f84',
         borderTopLeftRadius: 17,
         borderBottomLeftRadius: 17,
