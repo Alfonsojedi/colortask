@@ -1,4 +1,4 @@
-import {View, StyleSheet, Button } from 'react-native';
+import {Text, View, StyleSheet, Button } from 'react-native';
 import React from 'react';
 import { NavigationProp } from '@react-navigation/native';
 import { fire_auth } from '@/FirebaseConf';
@@ -11,8 +11,9 @@ interface RouterProps {
 const List = ({ navigation} : RouterProps) => {
     return(
         <View style={styles.container}>
-            <Button title='Abrir tareas' color={styles.button.color} onPress={() => navigation.navigate('Tasks')}></Button>
-            <Button title='Cerrar sesión' color={styles.button.color} onPress={() => fire_auth.signOut()}></Button>
+            <Text style={{fontSize: 40, fontWeight: 'bold', marginBottom: 40}}>Bienvenido</Text>
+            <Button title='Abrir tareas' color={'#f84'} onPress={() => navigation.navigate('Tasks')}></Button>
+            <Button title='Cerrar sesión' color={'#f84'} onPress={() => fire_auth.signOut()}></Button>
         </View>
     )
 }
@@ -24,9 +25,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      backgroundColor: '#fec',
     },
-    button: {
-        color: '#f84',
-    }
   });

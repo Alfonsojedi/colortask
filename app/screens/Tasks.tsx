@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import Task from '@/components/Task';
 import { Agenda } from 'react-native-calendars';
 import ColorBox from '@/components/ColorBox';
 import { NavigationProp } from '@react-navigation/native';
+import { fire_auth } from '@/FirebaseConf';
+import { TaskText } from '@/components/TaskText';
 /*
 LocaleConfig.locales['es']= {
     dayNamesShort: ['L','M','X','J','V','S','D'],
@@ -47,14 +49,15 @@ const SinTareas = () => {
         </View>
     )
 }
+const pruebas = {
+    '2024-11-24': [],
+    '2024-11-25': [{name: 'item 3 - any js object', colors: ['#fff'], desc: 'tareas' , done: true}],
+    '2024-11-26': [{name: 'Diseñando task', desc: 'Algo', done: true , colors: ['#fff','#848','#344'], prior: 1}, {name: 'any js object', colors: ['#f75'], done: true},{name: '3º task', colors: [], done: false}],
+    '2024-11-27': [{name: 'Unir con BBDD', colors: [], done: false}],
+    '2024-11-28': [{name: 'Crear add/edit', colors: [], desc: 'tareas' , done: false}],
+}
 const Tasks = () => {
-    const [items, setItems] = useState({
-        '2024-11-24': [],
-        '2024-11-25': [{name: 'item 3 - any js object', colors: ['#fff'], desc: 'tareas' , done: true}],
-        '2024-11-26': [{name: 'item 3 - any js object', desc: 'Algo', done: true , colors: ['#fff','#848','#344']}, {name: 'any js object', colors: ['#f75'], done: true},{name: 'item 1 - any js object', colors: [], done: false}],
-        '2024-11-27': [{name: 'item 1 - any js object', colors: []}],
-        '2024-11-23': [{name: 'item 2 - any js object', desc: 'tareas' , done: true}],
-      });
+    const [items, setItems] = useState(pruebas);
     return(
         <View style={styles.container}>
             <View style={styles.tasksPage}>
@@ -78,29 +81,34 @@ const Tasks = () => {
                     renderItem={(tasks) => (
                         <View style={ColorPick(tasks.colors[0])}>
                             <View style={styles.taskLeft}>
-                                <View style={Check(tasks.done)}>
-
-                                </View>
+                                <View style={Check(tasks.done)}></View>
                             </View>
                             <View style={styles.taskRight}>
                                 <ColorBox colores={tasks.colors}></ColorBox>
-                                <Text>{tasks.name}</Text>
-                                <Text>{tasks.task}</Text>
-                                <Text>{tasks.desc}</Text>
+                                <TaskText stroke={1} color='#fff'>
+                                    <Text style={{fontSize: 20,color: '#000'}}>{tasks.name}</Text>
+                                </TaskText>
+                                <TaskText stroke={1} color='#fff'>
+                                    <Text style={{fontSize: 12,color: '#000'}}>{tasks.desc}</Text>
+                                </TaskText>
+                                <TaskText stroke={1} color='#fff'>
+                                    <Text style={{fontSize: 16,color: '#000'}}>{tasks.prior}</Text>
+                                </TaskText>
                             </View>
                             <View style={styles.taskButtons}>
-                                <TouchableOpacity>
+                                <TouchableOpacity style={{marginRight: 5}}>
                                     <Image source={require("@/assets/images/Delete.svg")}></Image>
                                 </TouchableOpacity>
-                                <TouchableOpacity>
+                                <TouchableOpacity style={{marginRight: 5}}>
                                     <Image source={require("@/assets/images/Edit.svg")}></Image>
                                 </TouchableOpacity>
                             </View>
                         </View>
-                    )}
-                    >
-                    </Agenda>
+                    )}/>
                 </View>
+            </View>
+            <View style={styles.cerrar}>
+                <Button title='Cerrar sesión' color={'#f84'} onPress={() => fire_auth.signOut()}></Button>
             </View>
             <TouchableOpacity style={styles.add} onPress={() => navigation.navigate('Tasks')}>
                 <Image source={require("@/assets/images/add.svg")}></Image>
@@ -166,7 +174,7 @@ const styles = StyleSheet.create({
     taskRight: {
         borderLeftWidth: 3,
         borderColor: '#0008',
-        padding: 10,
+        padding: 5,
     },
     taskButtons: {
         flex: 1,
@@ -186,4 +194,15 @@ const styles = StyleSheet.create({
         bottom: 30,
         right: 30,
     },
+    cerrar: {
+        position: 'absolute',
+        bottom: 30,
+        left: 30,
+    },
+    readText: {
+        color:'#000',
+        textShadowColor: '#fff',
+        textShadowOffset: {width: 1, height: 1},
+        fontWeight: 'bold',
+    }
   });

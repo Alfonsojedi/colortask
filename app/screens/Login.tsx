@@ -14,7 +14,6 @@ const Login = () => {
     try{
       const response = await signInWithEmailAndPassword(auth,email,password);
       console.log(response);
-      alert('Por favor, compruebe su email.')
     }catch (error){
       console.log(error);
       alert('Hubo un error al entrar. Compruebe sus datos:\n'+error)
@@ -44,9 +43,9 @@ const Login = () => {
       <ActivityIndicator size="large" color="#ff8800"></ActivityIndicator>
       :
       <>
-        <Button title='Acceder' color={styles.button.color} onPress={signIn}></Button>
+        <Button title='Acceder' color={'#f84'} onPress={signIn}></Button>
         <View style={styles.gap}></View>
-        <Button title='Regístrate' color={styles.button.color} onPress={signUp}></Button>
+        <Button title='Regístrate' color={'#f84'} onPress={signUp}></Button>
       </>}
     </KeyboardAvoidingView>
   </View>
