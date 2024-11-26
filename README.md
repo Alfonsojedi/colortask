@@ -1,5 +1,6 @@
 # Colortask
 ## Funcionalidades
+Crea una cuenta para entrar en la app. (Necesitarás un correo electrónico)
 Crea tareas con colores personalizables.
 
 ## Por terminar
