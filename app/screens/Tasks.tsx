@@ -130,39 +130,7 @@ const Tasks = ({ navigation} : RouterProps) => {
             </View>
             <View style={styles.calendar}>
                 <View style={styles.calendario}>
-                    <Agenda
-                    items={items}
-                    theme={customTheme}
-                    showOnlySelectedDayItems={true}
-                    renderEmptyData={SinTareas}
-                    renderItem={(tasks: TaskProps) => (
-                        <View style={ColorPick(tasks.colors[0])}>
-                            <View style={styles.taskLeft}>
-                                <View style={Check(tasks.done)}></View>
-                            </View>
-                            <View style={styles.taskRight}>
-                                <ColorBox colores={tasks.colors}></ColorBox>
-                                <TaskText stroke={1} color='#fff'>
-                                    <Text style={{fontSize: 20,color: '#000'}}>{tasks.name}</Text>
-                                </TaskText>
-                                <TaskText stroke={1} color='#fff'>
-                                    <Text style={{fontSize: 12,color: '#000'}}>{tasks.desc}</Text>
-                                </TaskText>
-                                <TaskText stroke={1} color='#000'>
-                                    <Text style={{fontSize: 16,color: '#e21'}}>{tasks.prior}</Text>
-                                </TaskText>
-                            </View>
-                            <View style={styles.taskButtons}>
-                                <TouchableOpacity style={{marginRight: 5}}>
-                                    <Image source={require("@/assets/images/Delete.svg")}></Image>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={{marginRight: 5}}>
-                                    <Image source={require("@/assets/images/Edit.svg")}></Image>
-                                </TouchableOpacity>
-                            </View>
-                            <FetchData></FetchData>
-                        </View>
-                    )}/>
+                <FetchData></FetchData>
                 </View>
             </View>
             <View style={styles.cerrar}>
