@@ -14,8 +14,8 @@ const InsideStack = createNativeStackNavigator();
 function InsideLayout() {
   return(
       <InsideStack.Navigator>
-        <InsideStack.Screen name="To do" component={List}></InsideStack.Screen>
-        <InsideStack.Screen name="Tasks" component={Tasks}></InsideStack.Screen>
+        <InsideStack.Screen name="To do" component={List} options={{headerShown: false}}></InsideStack.Screen>
+        <InsideStack.Screen name="Tasks" component={Tasks} options={{headerShown: false}}></InsideStack.Screen>
       </InsideStack.Navigator>
   )
 }

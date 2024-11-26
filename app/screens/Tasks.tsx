@@ -2,14 +2,13 @@ import { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 import Task from '@/components/Task';
-import { Agenda, calendarTheme } from 'react-native-calendars';
+import { Agenda } from 'react-native-calendars';
 /*
 LocaleConfig.locales['es']= {
     dayNamesShort: ['L','M','X','J','V','S','D'],
 }
 */
 const customTheme = {
-    ...calendarTheme,
     agendaTodayColor: '#f88',
     agendaKnobColor: '#f64',
     selectedDayBackgroundColor: '#f84',
@@ -65,10 +64,12 @@ const Tasks = () => {
                         </View>
                     )}
                     >
-
                     </Agenda>
                 </View>
             </View>
+            <TouchableOpacity style={styles.add}>
+                <Image source={require("@/assets/images/add.svg")}></Image>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -83,9 +84,10 @@ const styles = StyleSheet.create({
     },
     container: {
       flex: 1,
+      backgroundColor: '#fec'
     },
     tasksPage: {
-        backgroundColor: '#F84',
+        backgroundColor: '#f84',
         paddingHorizontal: 4,
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -110,7 +112,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     taskText: {
-        color: '#FFF',
+        color: '#fec',
         fontSize: 16,
         fontWeight: 'bold',
     },
@@ -118,7 +120,7 @@ const styles = StyleSheet.create({
         flex: 1,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
-        backgroundColor: '#fff',
+        backgroundColor: '#fec',
     },
     task:{
         flex: 1,
@@ -144,6 +146,15 @@ const styles = StyleSheet.create({
     },
     calendario:{
         flex: 1,
-        padding: 20,
+        padding: 5,
+    },
+    add: {
+        backgroundColor: '#f84',
+        borderRadius: 30,
+        borderWidth: 3,
+        borderColor: '#fff4',
+        position: 'absolute',
+        bottom: 30,
+        right: 30,
     },
   });
