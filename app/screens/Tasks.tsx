@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, Button, TextInput } from 'react-native';
 import Task from '@/components/Task';
 import { Agenda } from 'react-native-calendars';
@@ -6,6 +6,8 @@ import ColorBox from '@/components/ColorBox';
 import { NavigationProp } from '@react-navigation/native';
 import { fire_auth } from '@/FirebaseConf';
 import { TaskText } from '@/components/TaskText';
+import { fire_db } from '@/FirebaseConf';
+import {ref, onValue} from 'firebase/database';
 
 interface RouterProps {
     navigation: NavigationProp<any, any>;
@@ -49,6 +51,38 @@ const SinTareas = () => {
         </View>
     )
 }
+const FetchData = () => {
+    const [todoData,setTodoData] = useState([]);
+    useEffect(() => {
+        const startCountRef = ref(fire_db, 'posts/')
+        onValue(startCountRef, (snapshot) => {
+            const data = snapshot.val();
+            const newPosts = Object.keys(data).map(key => ({
+                id: key,
+                ...data[key]
+            }));
+            console.log(newPosts);
+            setTodoData(newPosts);
+        })
+    },[])
+    return(
+        <View>
+            <Text>Tareas Añadidas</Text>
+            {todoData.map((item,index) => {
+                return( 
+                    <View key={index}> 
+                        <Text>{item.name}</Text>
+                        <Text>{item.desc}</Text>
+                        <Text>{item.done}</Text>
+                        <Text>{item.colors}</Text>
+                        <Text>{item.prior}</Text>
+                        <Text>{item.date}</Text>
+                    </View>
+                )
+            })}
+        </View>
+)
+}
 const pruebas = {
     '2024-11-24': [],
     '2024-11-25': [{name: 'item 3 - any js object', colors: ['#fff'], desc: 'tareas' , done: true}],
@@ -58,6 +92,7 @@ const pruebas = {
 }
 const Tasks = ({ navigation} : RouterProps) => {
     const [items, setItems] = useState(pruebas);
+
     return(
         <View style={styles.container}>
             <View style={styles.tasksPage}>
@@ -103,6 +138,7 @@ const Tasks = ({ navigation} : RouterProps) => {
                                     <Image source={require("@/assets/images/Edit.svg")}></Image>
                                 </TouchableOpacity>
                             </View>
+                            <FetchData></FetchData>
                         </View>
                     )}/>
                 </View>
