@@ -3,6 +3,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 import Task from '@/components/Task';
 import { Agenda } from 'react-native-calendars';
+import ColorBox from '@/components/ColorBox';
 /*
 LocaleConfig.locales['es']= {
     dayNamesShort: ['L','M','X','J','V','S','D'],
@@ -14,21 +15,31 @@ const customTheme = {
     selectedDayBackgroundColor: '#f84',
     dotColor: '#f84',
 }
-
+const ColorPick = (colores='#888') => {
+    return ({
+        flex: 1,
+        borderRadius: 20,
+        backgroundColor: colores,
+        borderColor: '#0008',
+        borderWidth: 3,
+        flexDirection: 'row',
+        marginBottom: 5,
+    })
+}
 const SinTareas = () => {
     return(
         <View style={styles.noItems}>
-            <Text>No hay tareas para este día.</Text>
+            <Text style={{fontSize: 32, fontWeight: 'bold'}}>No hay tareas en este día.</Text>
         </View>
     )
 }
 const Tasks = () => {
     const [items, setItems] = useState({
-        '2024-11-22': [{name: 'item 1 - any js object'}],
-        '2024-11-23': [{name: 'item 2 - any js object', height: 80}],
         '2024-11-24': [],
-        '2024-11-25': [{name: 'item 3 - any js object', color: '#fff'}],
-        '2024-11-26': [{name: 'item 3 - any js object', color: '#fff'}, {name: 'any js object', color: '#f75'}]
+        '2024-11-25': [{name: 'item 3 - any js object', colors: ['#fff'], desc: 'tareas'}],
+        '2024-11-26': [{name: 'item 3 - any js object', desc: 'Algo' , colors: ['#fff','#848','#344']}, {name: 'any js object', colors: ['#f75']},{name: 'item 1 - any js object', colors: []}],
+        '2024-11-27': [{name: 'item 1 - any js object', colors: []}],
+        '2024-11-23': [{name: 'item 2 - any js object', desc: 'tareas'}],
       });
     return(
         <View style={styles.container}>
@@ -40,7 +51,7 @@ const Tasks = () => {
                     </View>
                 </View>
                 <TouchableOpacity>
-                    <Image source={require("@/assets/images/bell.png")} style={styles.notificar}></Image>
+                    <Image source={require("@/assets/images/bell.svg")}></Image>
                 </TouchableOpacity>
             </View>
             <View style={styles.calendar}>
@@ -50,16 +61,24 @@ const Tasks = () => {
                     theme={customTheme}
                     showOnlySelectedDayItems={true}
                     renderEmptyData={SinTareas}
-                    renderItem={(items) => (
-                        <View style={styles.task}>
+                    renderItem={(tasks) => (
+                        <View style={ColorPick(tasks.colors[0])}>
                             <View style={styles.taskLeft}>
-                                <Text>Todo</Text>
+                                <Text>0/1</Text>
                             </View>
                             <View style={styles.taskRight}>
-                                <Text>{items.color}</Text>
-                                <Text>{items.name}</Text>
-                                <Text>{items.task}</Text>
-                                <Text>{items.desc}</Text>
+                                <ColorBox colores={tasks.colors}></ColorBox>
+                                <Text>{tasks.name}</Text>
+                                <Text>{tasks.task}</Text>
+                                <Text>{tasks.desc}</Text>
+                            </View>
+                            <View style={styles.taskButtons}>
+                                <TouchableOpacity>
+                                    <Image source={require("@/assets/images/bell.svg")}></Image>
+                                </TouchableOpacity>
+                                <TouchableOpacity>
+                                    <Image source={require("@/assets/images/bell.svg")}></Image>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     )}
@@ -81,6 +100,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#fec',
     },
     container: {
       flex: 1,
@@ -102,10 +122,6 @@ const styles = StyleSheet.create({
     lista: {
 
     },
-    notificar: {
-        width: 40,
-        height: 40,
-    },
     taskTitle: {
         color: '#FFF',
         fontSize: 24,
@@ -122,19 +138,11 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 20,
         backgroundColor: '#fec',
     },
-    task:{
-        flex: 1,
-        borderRadius: 20,
-        backgroundColor: '#48f',
-        borderColor: '#0008',
-        borderWidth: 3,
-        flexDirection: 'row',
-    },
     taskLeft: {
-        width: '10%',
+        width: 60,
         backgroundColor: '#f84',
-        borderTopLeftRadius: 20,
-        borderBottomLeftRadius: 20,
+        borderTopLeftRadius: 17,
+        borderBottomLeftRadius: 17,
         alignContent:'center',
         justifyContent: 'center',
         padding: 10,
@@ -144,13 +152,18 @@ const styles = StyleSheet.create({
         borderColor: '#0008',
         padding: 10,
     },
+    taskButtons: {
+        flex: 1,
+        flexDirection: 'row-reverse',
+        alignItems: 'center',
+    },
     calendario:{
         flex: 1,
         padding: 5,
     },
     add: {
         backgroundColor: '#f84',
-        borderRadius: 30,
+        borderRadius: 20,
         borderWidth: 3,
         borderColor: '#fff4',
         position: 'absolute',
