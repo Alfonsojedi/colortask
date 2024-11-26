@@ -1,5 +1,19 @@
 # Colortask
+## Funcionalidades
+Crea tareas con colores personalizables.
 
+## Por terminar
+Editar, borrar y mostrar datos de la base de datos
+Añadir soporte de múltiples colores
+
+## Instalación
+- > git clone https://github.com/Alfonsojedi/colortask
+- > cd colortask
+- > npx expo start
+- Esperar a que cargue y elige la versión de la app que quieras usar. (Web presiona 'w')
+Asegúrate de tener instalado npm / npx préviamente
+
+## Autor
 Hecho por @Alfonsojedi
 <!--
 # Welcome to your Expo app 👋
