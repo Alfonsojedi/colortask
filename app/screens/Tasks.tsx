@@ -85,10 +85,10 @@ const FetchData = () => {
                                 <Text style={{fontSize: 16,color: '#e21'}}>{tasks.prior}</Text>
                             </TaskText>
                             <TaskText stroke={1} color='#000'>
-                                <Text style={{fontSize: 16,color: '#e21'}}>{tasks.date}</Text>
+                                <Text style={{fontSize: 16,color: '#2e1'}}>{tasks.date}</Text>
                             </TaskText>
                             <TaskText stroke={1} color='#000'>
-                                <Text style={{fontSize: 16,color: '#e21'}}>{tasks.colors}</Text>
+                                <Text style={{fontSize: 16,color: '#12e'}}>{tasks.colors}</Text>
                             </TaskText>
                         </View>
                         <View style={styles.taskButtons}>
