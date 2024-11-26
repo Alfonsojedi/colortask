@@ -77,7 +77,9 @@ export const Add = ({ navigation} : RouterProps) => {
                 color={'#f84'}
             >
             </Button>
-            <Button title='Abrir tareas' color={'#f84'} onPress={() => navigation.navigate('Tasks')}></Button>
+            <View style={{marginTop: 5}}>
+                <Button title='Abrir tareas' color={'#f84'} onPress={() => navigation.navigate('Tasks')}></Button>
+            </View>
         </View>
     )
 }

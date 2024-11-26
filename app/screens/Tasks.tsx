@@ -10,6 +10,7 @@ import { TaskText } from '@/components/TaskText';
 interface RouterProps {
     navigation: NavigationProp<any, any>;
 }
+interface TaskProps { colors: (string | undefined)[]; done: boolean | undefined; name: string | undefined; desc: string | null | undefined; prior:  number | null | undefined; }
 const customTheme = {
     agendaTodayColor: '#f88',
     agendaKnobColor: '#f64',
@@ -30,7 +31,7 @@ const Check = (done=false) => {
         height: 30,
     })
 }
-const ColorPick = (colores='#888') => {
+const ColorPick = (colores='#999') => {
     return ({
         flex: 1,
         borderRadius: 20,
@@ -38,7 +39,7 @@ const ColorPick = (colores='#888') => {
         borderColor: '#0008',
         borderWidth: 3,
         flexDirection: 'row',
-        marginBottom: 5,
+        marginTop: 5,
     })
 }
 const SinTareas = () => {
@@ -51,7 +52,7 @@ const SinTareas = () => {
 const pruebas = {
     '2024-11-24': [],
     '2024-11-25': [{name: 'item 3 - any js object', colors: ['#fff'], desc: 'tareas' , done: true}],
-    '2024-11-26': [{name: 'Diseñando task', desc: 'Algo', done: true , colors: ['#fff','#848','#344'], prior: 1}, {name: 'any js object', colors: ['#f75'], done: true},{name: '3º task', colors: [], done: false}],
+    '2024-11-26': [{name: 'Diseñando task', desc: 'Algo', done: true , colors: ['#08f','#848','#344'], prior: 1}, {name: 'any js object', colors: ['#f31'], done: true},{name: '3º task', colors: [], done: false}],
     '2024-11-27': [{name: 'Unir con BBDD', colors: [], done: false}],
     '2024-11-28': [{name: 'Crear add/edit', colors: [], desc: 'tareas' , done: false}],
 }
@@ -61,7 +62,7 @@ const Tasks = ({ navigation} : RouterProps) => {
         <View style={styles.container}>
             <View style={styles.tasksPage}>
                 <View style={styles.profile}>
-                    <View style={styles.lista}>
+                    <View>
                         <Text style={styles.taskTitle}>Lista de tareas</Text>
                         <Text style={styles.taskText}>Tareas a completar</Text>
                     </View>
@@ -77,7 +78,7 @@ const Tasks = ({ navigation} : RouterProps) => {
                     theme={customTheme}
                     showOnlySelectedDayItems={true}
                     renderEmptyData={SinTareas}
-                    renderItem={(tasks) => (
+                    renderItem={(tasks: TaskProps) => (
                         <View style={ColorPick(tasks.colors[0])}>
                             <View style={styles.taskLeft}>
                                 <View style={Check(tasks.done)}></View>
@@ -90,8 +91,8 @@ const Tasks = ({ navigation} : RouterProps) => {
                                 <TaskText stroke={1} color='#fff'>
                                     <Text style={{fontSize: 12,color: '#000'}}>{tasks.desc}</Text>
                                 </TaskText>
-                                <TaskText stroke={1} color='#fff'>
-                                    <Text style={{fontSize: 16,color: '#000'}}>{tasks.prior}</Text>
+                                <TaskText stroke={1} color='#000'>
+                                    <Text style={{fontSize: 16,color: '#e21'}}>{tasks.prior}</Text>
                                 </TaskText>
                             </View>
                             <View style={styles.taskButtons}>
@@ -141,9 +142,6 @@ const styles = StyleSheet.create({
     profile: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-    },
-    lista: {
-
     },
     taskTitle: {
         color: '#FFF',

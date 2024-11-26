@@ -43,8 +43,12 @@ const Login = () => {
       <ActivityIndicator size="large" color="#ff8800"></ActivityIndicator>
       :
       <>
-        <Button title='Acceder' color={'#f84'} onPress={signIn}></Button>
-        <Button title='Regístrate' color={'#f84'} onPress={signUp}></Button>
+        <View style={{marginBottom: 5}}>
+          <Button title='Acceder' color={'#f84'} onPress={signIn}></Button>
+        </View>
+        <View style={{marginBottom: 5}}>
+          <Button title='Regístrate' color={'#f84'} onPress={signUp}></Button>
+        </View>
       </>}
     </KeyboardAvoidingView>
   </View>
