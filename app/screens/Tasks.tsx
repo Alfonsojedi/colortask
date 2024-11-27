@@ -75,20 +75,18 @@ const FetchData = () => {
                             <View style={Check(tasks.done)}></View>
                         </View>
                         <View style={styles.taskRight}>
+                            <ColorBox colores={tasks.colors}></ColorBox>
                             <TaskText stroke={1} color='#fff'>
                                 <Text style={{fontSize: 20,color: '#000'}}>{tasks.name}</Text>
+                            </TaskText>
+                            <TaskText stroke={1} color='#000'>
+                                <Text style={{fontSize: 12,color: '#0d4'}}>{tasks.date}</Text>
                             </TaskText>
                             <TaskText stroke={1} color='#fff'>
                                 <Text style={{fontSize: 12,color: '#000'}}>{tasks.desc}</Text>
                             </TaskText>
                             <TaskText stroke={1} color='#000'>
                                 <Text style={{fontSize: 16,color: '#e21'}}>{tasks.prior}</Text>
-                            </TaskText>
-                            <TaskText stroke={1} color='#000'>
-                                <Text style={{fontSize: 16,color: '#2e1'}}>{tasks.date}</Text>
-                            </TaskText>
-                            <TaskText stroke={1} color='#000'>
-                                <Text style={{fontSize: 16,color: '#12e'}}>{tasks.colors}</Text>
                             </TaskText>
                         </View>
                         <View style={styles.taskButtons}>

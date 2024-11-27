@@ -16,6 +16,13 @@ const Boxer = (color) => {
 }
 
 export default function ColorBox({colores}){
+    if(typeof colores === 'string'){
+        return(
+            <View style={{flex:1, flexDirection: 'row'}}>
+                <View style={Boxer(colores)}></View>
+            </View>
+        )
+    }
     return(
         <View style={{flex:1, flexDirection: 'row'}}>
         {colores.map(color => (
