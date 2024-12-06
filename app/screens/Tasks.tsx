@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, Button, TextInput } from 'react-native';
-import Task from '@/components/Task';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import ColorBox from '@/components/ColorBox';
 import { NavigationProp } from '@react-navigation/native';
@@ -8,6 +7,7 @@ import { fire_auth } from '@/FirebaseConf';
 import { TaskText } from '@/components/TaskText';
 import { fire_db } from '@/FirebaseConf';
 import {ref, onValue} from 'firebase/database';
+import { Colores } from '@/constants/Colores';
 
 interface RouterProps {
     navigation: NavigationProp<any, any>;
@@ -20,9 +20,9 @@ const customTheme = {
     dotColor: '#f84',
 }
 const Check = (done=false) => {
-    let color='#f21';
+    let color=Colores.light.danger;
     if(done){
-        color='#0d4';
+        color=Colores.light.success;
     }
     return ({
         borderColor: color,
@@ -148,11 +148,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#fec',
+        backgroundColor: Colores.light.background,
     },
     container: {
       flex: 1,
-      backgroundColor: '#fec'
+      backgroundColor: Colores.light.background,
     },
     tasksPage: {
         backgroundColor: '#f84',
