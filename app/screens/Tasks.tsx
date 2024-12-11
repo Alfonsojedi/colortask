@@ -57,12 +57,12 @@ const FetchData = () => {
         const startCountRef = ref(fire_db, 'posts/')
         onValue(startCountRef, (snapshot) => {
             const data = snapshot.val();
-            const newPosts = Object.keys(data).map(key => ({
+            const posts = Object.keys(data).map(key => ({
                 id: key,
                 ...data[key]
             }));
-            console.log(newPosts);
-            setTodoData(newPosts);
+            console.log(posts);
+            setTodoData(posts);
         })
     },[])
     return(

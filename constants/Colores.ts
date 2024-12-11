@@ -3,14 +3,14 @@ const tintColorDark = '#fff';
 
 export const Colores = {
     light: {
-      text: '#11141C',
-      background: '#ffeecc',
-      secondary: '#ff8844',
-      white: '#ffffff',
-      black: '#000000',
-      danger: '#ee2211',
-      warning: '#ffcc44',
-      success: '#00dd44',
+      text: '#112',
+      background: '#fec',
+      secondary: '#c63',
+      white: '#fff',
+      black: '#000',
+      danger: '#d21',
+      warning: '#eb2',
+      success: '#0c4',
     
 
       tint: tintColorLight,
