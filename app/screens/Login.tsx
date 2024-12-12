@@ -2,6 +2,7 @@ import { View, StyleSheet, Text, TextInput, Button, ActivityIndicator, KeyboardA
 import React, { useState} from 'react';
 import { fire_auth } from '@/FirebaseConf';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
+import { Colores } from '@/constants/Colores';
 
 const Login = () => {
   const [email,setEmail] = useState('');
@@ -40,14 +41,14 @@ const Login = () => {
     <TextInput value={email} style={styles.input} placeholder='E-mail' onChangeText={(text) => setEmail(text)}></TextInput>
     <TextInput secureTextEntry={true} value={password} style={styles.input} placeholder='Contraseña' autoCapitalize='none' onChangeText={(text) => setPassword(text)}></TextInput>
     {loading ? 
-      <ActivityIndicator size="large" color="#ff8800"></ActivityIndicator>
+      <ActivityIndicator size="large" color={Colores.light.secondary}></ActivityIndicator>
       :
       <>
         <View style={{marginBottom: 5}}>
-          <Button title='Acceder' color={'#f84'} onPress={signIn}></Button>
+          <Button title='Acceder' color={Colores.light.secondary} onPress={signIn}></Button>
         </View>
         <View style={{marginBottom: 5}}>
-          <Button title='Regístrate' color={'#f84'} onPress={signUp}></Button>
+          <Button title='Regístrate' color={Colores.light.secondary} onPress={signUp}></Button>
         </View>
       </>}
     </KeyboardAvoidingView>
@@ -69,15 +70,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     padding: 10,
-    backgroundColor: '#fff',
+    backgroundColor: Colores.light.white,
   },
   button: {
-    color: '#f84',
+    color: Colores.light.secondary,
     margin: 10,
     width: '40%',
   },
   title: {
-    color: '#f84',
+    color: Colores.light.secondary,
     fontWeight: 'bold',
     fontSize: 40,
     textAlign: 'center',

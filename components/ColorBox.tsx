@@ -1,12 +1,11 @@
-import { ThemedView } from '@/components/ThemedView';
-import { useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
+import { Colores } from '@/constants/Colores';
 
 const Boxer = (color) => {
     return ({
         borderRadius: 5,
         backgroundColor: color,
-        borderColor: '#0008',
+        borderColor: Colores.light.outline,
         borderWidth: 3,
         flexDirection: 'row',
         width: 20,

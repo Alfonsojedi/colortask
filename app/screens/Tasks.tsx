@@ -12,13 +12,14 @@ import { Colores } from '@/constants/Colores';
 interface RouterProps {
     navigation: NavigationProp<any, any>;
 }
-interface TaskProps { colors: (string | undefined)[]; done: boolean | undefined; name: string | undefined; desc: string | null | undefined; prior:  number | null | undefined; }
+//interface TaskProps { colors: (string | undefined)[]; done: boolean | undefined; name: string | undefined; desc: string | null | undefined; prior:  number | null | undefined; }
+/*
 const customTheme = {
     agendaTodayColor: '#f88',
     agendaKnobColor: '#f64',
     selectedDayBackgroundColor: '#f84',
     dotColor: '#f84',
-}
+}*/
 const Check = (done=false) => {
     let color=Colores.light.danger;
     if(done){
@@ -26,7 +27,7 @@ const Check = (done=false) => {
     }
     return ({
         borderColor: color,
-        borderWidth: 3,
+        borderWidth: 4,
         borderRadius: 20,
         flexDirection: 'row',
         width: 30,
@@ -36,10 +37,10 @@ const Check = (done=false) => {
 const ColorPick = (colores='#999') => {
     return ({
         flex: 1,
-        borderRadius: 20,
+        borderRadius: 10,
         backgroundColor: colores,
         borderColor: '#0008',
-        borderWidth: 3,
+        borderWidth: 2,
         flexDirection: 'row',
         marginTop: 5,
     })
@@ -67,7 +68,7 @@ const FetchData = () => {
     },[])
     return(
         <View>
-            <Text>Tareas Añadidas</Text>
+            <Text>31-12-2024</Text>
             {todoData.map((tasks,index) => {
                 return( 
                     <View style={ColorPick(tasks.colors)}>
@@ -132,7 +133,7 @@ const Tasks = ({ navigation} : RouterProps) => {
                 </View>
             </View>
             <View style={styles.cerrar}>
-                <Button title='Cerrar sesión' color={'#f84'} onPress={() => fire_auth.signOut()}></Button>
+                <Button title='Cerrar sesión' color={Colores.light.secondary} onPress={() => fire_auth.signOut()}></Button>
             </View>
             <TouchableOpacity style={styles.add} onPress={() => navigation.navigate('Add')}>
                 <Image source={require("@/assets/images/add.svg")}></Image>
@@ -155,12 +156,12 @@ const styles = StyleSheet.create({
       backgroundColor: Colores.light.background,
     },
     tasksPage: {
-        backgroundColor: '#f84',
+        backgroundColor: Colores.light.secondary,
         paddingHorizontal: 4,
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingTop: 10,
-        paddingBottom: 20,
+        paddingBottom: 10,
         alignItems: 'center',
     },
     profile: {
@@ -168,12 +169,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     taskTitle: {
-        color: '#FFF',
+        color: Colores.light.white,
         fontSize: 24,
         fontWeight: 'bold',
     },
     taskText: {
-        color: '#fec',
+        color: Colores.light.background,
         fontSize: 16,
         fontWeight: 'bold',
     },
@@ -181,21 +182,22 @@ const styles = StyleSheet.create({
         flex: 1,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
-        backgroundColor: '#fec',
+        backgroundColor: Colores.light.background,
     },
     taskLeft: {
         width: 50,
-        backgroundColor: '#f84',
-        borderTopLeftRadius: 17,
-        borderBottomLeftRadius: 17,
+        backgroundColor: Colores.light.secondary,
+        borderTopLeftRadius: 8,
+        borderBottomLeftRadius: 8,
         alignContent:'center',
         justifyContent: 'center',
         padding: 10,
     },
     taskRight: {
-        borderLeftWidth: 3,
-        borderColor: '#0008',
+        borderLeftWidth: 2,
+        borderColor: Colores.light.outline,
         padding: 5,
+        maxWidth: '70%',
     },
     taskButtons: {
         flex: 1,
@@ -207,10 +209,10 @@ const styles = StyleSheet.create({
         padding: 5,
     },
     add: {
-        backgroundColor: '#f84',
-        borderRadius: 20,
-        borderWidth: 3,
-        borderColor: '#fff4',
+        backgroundColor: Colores.light.secondary,
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: Colores.light.outlineLight,
         position: 'absolute',
         bottom: 30,
         right: 30,
@@ -221,8 +223,8 @@ const styles = StyleSheet.create({
         left: 30,
     },
     readText: {
-        color:'#000',
-        textShadowColor: '#fff',
+        color: Colores.light.black,
+        textShadowColor: Colores.light.white,
         textShadowOffset: {width: 1, height: 1},
         fontWeight: 'bold',
     }
