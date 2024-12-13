@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import { Colores } from '@/constants/Colores';
 
-const Boxer = (color) => {
+const Boxer = (color: string) => {
     return ({
         borderRadius: 5,
         backgroundColor: color,
@@ -13,20 +13,20 @@ const Boxer = (color) => {
         marginRight: 5,
     })
 }
-
-export default function ColorBox({colores}){
+interface coloresProps {
+    colores: (String | String[] | Array<String>);
+}
+export function ColorBox({colores}: coloresProps){
     if(typeof colores === 'string'){
-        return(
-            <View style={{flex:1, flexDirection: 'row'}}>
-                <View style={Boxer(colores)}></View>
-            </View>
-        )
+        colores = [colores];
     }
     return(
-        <View style={{flex:1, flexDirection: 'row'}}>
-        {colores.map(color => (
+        <View style={{flex:1, flexDirection: 'row', maxWidth: '70%', marginBottom: 5}}>
+        {colores.map((color: string) => (
             <View style={Boxer(color)}></View>
         ))}
         </View>
     )
 }
+
+export default ColorBox;
