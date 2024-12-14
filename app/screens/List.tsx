@@ -4,7 +4,6 @@ import { NavigationProp } from '@react-navigation/native';
 import { fire_auth } from '@/FirebaseConf';
 import { Colores } from '@/constants/Colores';
 
-
 interface RouterProps {
     navigation: NavigationProp<any, any>;
 }
@@ -34,6 +33,6 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#fec',
+      backgroundColor: Colores.light.background,
     },
-  });
+});

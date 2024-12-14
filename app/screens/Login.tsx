@@ -9,12 +9,10 @@ const Login = () => {
   const [password,setPassword] = useState('');
   const [loading,setLoading] = useState(false);
   const auth = fire_auth;
-
   const signIn = async () => {
     setLoading(true);
     try{
       const response = await signInWithEmailAndPassword(auth,email,password);
-      console.log(response);
     }catch (error){
       console.log(error);
       alert('Hubo un error al entrar. Compruebe sus datos:\n'+error)
@@ -26,7 +24,6 @@ const Login = () => {
     setLoading(true);
     try{
       const response = await createUserWithEmailAndPassword(auth, email,password);
-      console.log(response)
     }catch (error){
       console.log(error);
       alert('Hubo un error al registrarse. Compruebe sus datos:\n'+error)
@@ -63,6 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '95%',
+    backgroundColor: Colores.light.background,
   },
   input: {
     marginVertical: 4,

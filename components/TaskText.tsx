@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     fontFamily: 'SpaceMono-Regular',
   },
 });
-
 export class TaskText extends React.Component<Props> {
   createClones = (w: number, h: number, color?: string) => {
     const { children } = this.props;
@@ -39,7 +38,6 @@ export class TaskText extends React.Component<Props> {
       return child;
     });
   }
-
   render() {
     const {color, stroke, children} = this.props;
     const strokeW = stroke;
@@ -47,7 +45,6 @@ export class TaskText extends React.Component<Props> {
     const topRight = this.createClones(strokeW, -strokeW, color);
     const bottomLeft = this.createClones(-strokeW, strokeW, color);
     const bottomRight = this.createClones(strokeW, strokeW, color);
-
     return (
       <View>
         <View style={ styles.outline }>{ topLeft }</View>

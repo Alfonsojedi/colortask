@@ -4,6 +4,7 @@ import { fire_auth } from '@/FirebaseConf';
 import { fire_db } from '@/FirebaseConf';
 import {ref, set} from 'firebase/database';
 import { useState } from 'react';
+import { Colores } from '@/constants/Colores';
 
 interface RouterProps {
     navigation: NavigationProp<any, any>;
@@ -87,7 +88,7 @@ export default Add;
 const styles =  StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fec',
+      backgroundColor: Colores.light.background,
       justifyContent: 'center',
       alignItems: 'center',
     },
@@ -97,6 +98,6 @@ const styles =  StyleSheet.create({
         borderWidth: 1,
         borderRadius: 4,
         padding: 10,
-        backgroundColor: '#fff',
+        backgroundColor: Colores.light.white,
       },
   });

@@ -22,13 +22,14 @@ export const Colores = {
     dark: {
       text: '#11181C',
       background: '#fec',
-      secondary: '#ff8844',
+      secondary: '#f84',
       white: '#fff',
       black: '#000',
       danger: '#e21',
       warning: '#fc4',
       success: '#0d4',
       outline: '#0008',
+      outlineLight: '#fff4',
 
       tint: tintColorDark,
       icon: '#687076',
