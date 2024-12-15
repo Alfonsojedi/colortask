@@ -6,25 +6,7 @@ import { Colores } from '@/constants/Colores';
 import { Agenda } from 'react-native-calendars';
 import Task from '@/components/Task';
 
-/*
-interface TaskProps { colors: (string | undefined)[]; done: boolean | undefined; name: string | undefined; desc: string | null | undefined; prior:  number | null | undefined; }
-const customTheme = {
-    agendaTodayColor: '#f88',
-    agendaKnobColor: '#f64',
-    selectedDayBackgroundColor: '#f84',
-    dotColor: '#f84',
-}
-const pruebas = {
-    '2024-11-24': [],
-    '2024-11-25': [{name: 'item 3 - any js object', colors: ['#fff'], desc: 'tareas' , done: true}],
-    '2024-11-26': [{name: 'Diseñando task', desc: 'Algo', done: true , colors: ['#08f','#848','#344'], prior: 1}, {name: 'any js object', colors: ['#f31'], done: true},{name: '3º task', colors: [], done: false}],
-    '2024-11-27': [{name: 'Unir con BBDD', colors: [], done: false}],
-    '2024-11-28': [{name: 'Crear add/edit', colors: [], desc: 'tareas' , done: false}],
-}*/
-interface RouterProps {
-    navigation: NavigationProp<any, any>;
-}
-const Tasks = ({ navigation} : RouterProps) => {
+const Tasks = (navigation : NavigationProp<any, any>) => {
     //const [items, setItems] = useState('');
     return(
         <View style={styles.container}>
