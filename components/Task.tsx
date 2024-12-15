@@ -1,10 +1,11 @@
-import { fire_db } from '@/FirebaseConf';
+import { fire_auth, fire_db } from '@/FirebaseConf';
 import { onValue, ref } from 'firebase/database';
 import { useEffect, useState } from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Colores } from '@/constants/Colores';
 import ColorBox from './ColorBox';
 import { TaskText } from './TaskText';
+import User from '@/constants/User';
 
 const SinTareas = () => {
     return(
@@ -40,7 +41,7 @@ const Check = (done=false) => {
 export function Task(){
     const [todoData,setTodoData] = useState<Array<any>>([]);
     useEffect(() => {
-        const startCountRef = ref(fire_db, 'posts/')
+        const startCountRef = ref(fire_db,User()+'/posts/')
         onValue(startCountRef, (snapshot) => {
             const data = snapshot.val();
             const posts = Object.keys(data).map(key => ({

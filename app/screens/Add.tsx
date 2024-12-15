@@ -5,6 +5,7 @@ import { fire_db } from '@/FirebaseConf';
 import {ref, set} from 'firebase/database';
 import { useState } from 'react';
 import { Colores } from '@/constants/Colores';
+import User from '@/constants/User';
 
 interface RouterProps {
     navigation: NavigationProp<any, any>;
@@ -19,7 +20,7 @@ export const Add = ({ navigation} : RouterProps) => {
     const [date,setDate] = useState('');
 
     const dataAddOn = () => {
-        set(ref(fire_db,'posts/'+name), {
+        set(ref(fire_db,User()+'/posts/'+name), {
             name: name,
             desc: desc,
             done: done,
