@@ -1,17 +1,17 @@
 import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
-import { fire_auth } from '@/FirebaseConf';
 import { fire_db } from '@/FirebaseConf';
 import {ref, set} from 'firebase/database';
 import { useState } from 'react';
 import { Colores } from '@/constants/Colores';
 import User from '@/constants/User';
+import Checkbox from '@/components/Checkbox';
 
 interface RouterProps {
     navigation: NavigationProp<any, any>;
 }
 
-export const Add = ({ navigation} : RouterProps) => {
+export const Add = ({navigation} : RouterProps) => {
     const [name,setName] = useState('');
     const [desc,setDesc] = useState('');
     const [done,setDone] = useState('');
@@ -35,7 +35,7 @@ export const Add = ({ navigation} : RouterProps) => {
         setColors('');
         setDate('');
     }
-    return (
+    return(
         <View style={styles.container}>
             <Text style={{fontSize: 40, fontWeight: 'bold'}}>Añadir tarea</Text>
             <TextInput
@@ -43,49 +43,45 @@ export const Add = ({ navigation} : RouterProps) => {
                 value={name}
                 onChangeText={(text) => setName(text)}
                 style={styles.input}
-            >
-            </TextInput>
+            ></TextInput>
             <TextInput
                 placeholder='Descripción'
                 value={desc}
                 onChangeText={(text) => setDesc(text)}
                 style={styles.input}
-            >
-            </TextInput>
+            ></TextInput>
             <TextInput
                 placeholder='¿Completado?'
                 value={done}
                 onChangeText={(text) => setDone(text)}
                 style={styles.input}
-            >
-            </TextInput>
+            ></TextInput>
             <TextInput
                 placeholder='Urgencia'
                 value={prior}
                 onChangeText={(text) => setPrior(text)}
                 style={styles.input}
-            >
-            </TextInput>
+            ></TextInput>
             <TextInput
                 placeholder='Color'
                 value={colors}
                 onChangeText={(text) => setColors(text)}
                 style={styles.input}
-            >
-            </TextInput>
+            ></TextInput>
             <Button
                 title='Añadir tarea'
                 onPress={dataAddOn}
-                color={'#f84'}
-            >
-            </Button>
+                color={Colores.light.secondary}
+            ></Button>
             <View style={{marginTop: 5}}>
-                <Button title='Abrir tareas' color={'#f84'} onPress={() => navigation.navigate('Tasks')}></Button>
+                <Button title='Abrir tareas' color={Colores.light.secondary} onPress={() => navigation.navigate('Tasks')}></Button>
             </View>
         </View>
     )
 }
+
 export default Add;
+
 const styles =  StyleSheet.create({
     container: {
       flex: 1,
@@ -100,5 +96,5 @@ const styles =  StyleSheet.create({
         borderRadius: 4,
         padding: 10,
         backgroundColor: Colores.light.white,
-      },
-  });
+    },
+});

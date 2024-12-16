@@ -3,28 +3,28 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, Button } from 'react-n
 import { NavigationProp } from '@react-navigation/native';
 import { fire_auth } from '@/FirebaseConf';
 import { Colores } from '@/constants/Colores';
-import { Agenda } from 'react-native-calendars';
 import Task from '@/components/Task';
 
-const Tasks = (navigation : NavigationProp<any, any>) => {
+interface RouterProps {
+    navigation: NavigationProp<any, any>;
+}
+const Tasks = ({navigation} : RouterProps) => {
     //const [items, setItems] = useState('');
     return(
         <View style={styles.container}>
             <View style={styles.tasksPage}>
                 <View style={styles.profile}>
                     <View>
-                        <Text style={styles.taskTitle}>Lista de tareas</Text>
-                        <Text style={styles.taskText}>Tareas a completar</Text>
+                        <Text style={styles.headTitle}>Lista de tareas</Text>
+                        <Text style={styles.headText}>Tareas a completar</Text>
                     </View>
                 </View>
                 <TouchableOpacity>
                     <Image source={require('@/assets/images/bell.svg')}></Image>
                 </TouchableOpacity>
             </View>
-            <View style={styles.calendar}>
-                <View style={styles.calendario}>
+            <View style={styles.tasks}>
                 <Task></Task>
-                </View>
             </View>
             <View style={styles.cerrar}>
                 <Button title='Cerrar sesión' color={Colores.light.secondary} onPress={() => fire_auth.signOut()}></Button>
@@ -56,25 +56,22 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
-    taskTitle: {
-        color: Colores.light.white,
-        fontSize: 24,
-        fontWeight: 'bold',
-    },
-    taskText: {
-        color: Colores.light.background,
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    calendar: {
+    tasks: {
         flex: 1,
+        padding: 5,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         backgroundColor: Colores.light.background,
     },
-    calendario: {
-        flex: 1,
-        padding: 5,
+    headTitle: {
+        color: Colores.light.white,
+        fontSize: 24,
+        fontWeight: 'bold',
+    },
+    headText: {
+        color: Colores.light.background,
+        fontSize: 16,
+        fontWeight: 'bold',
     },
     add: {
         backgroundColor: Colores.light.secondary,

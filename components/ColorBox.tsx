@@ -1,7 +1,7 @@
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { Colores } from '@/constants/Colores';
 
-const Boxer = (color: string) => {
+const Boxer = (color: String) => {
     return ({
         borderRadius: 5,
         backgroundColor: color,
@@ -14,7 +14,7 @@ const Boxer = (color: string) => {
     })
 }
 interface coloresProps {
-    colores: (String | String[] | Array<String>);
+    colores: (String | Array<String>);
 }
 export function ColorBox({colores}: coloresProps){
     if(typeof colores === 'string'){
@@ -22,9 +22,9 @@ export function ColorBox({colores}: coloresProps){
     }
     return(
         <View style={{flex:1, flexDirection: 'row', maxWidth: '70%', marginBottom: 5}}>
-        {colores.map((color: string) => (
-            <View style={Boxer(color)}></View>
-        ))}
+            {colores.map((color: String) => (
+                <TouchableOpacity style={Boxer(color)}></TouchableOpacity>
+            ))}
         </View>
     )
 }

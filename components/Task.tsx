@@ -6,8 +6,9 @@ import { Colores } from '@/constants/Colores';
 import ColorBox from './ColorBox';
 import { TaskText } from './TaskText';
 import User from '@/constants/User';
+import Checkbox from '@/components/Checkbox';
 
-const SinTareas = () => {
+export const SinTareas = () => {
     return(
         <View style={styles.noItems}>
             <Text style={{fontSize: 32, fontWeight: 'bold'}}>No hay tareas en este día.</Text>
@@ -26,17 +27,8 @@ const ColorPick = (colores='#999') => {
         
     })
 }
-const Check = (done=false) => {
-    let color;
-    done ? color=Colores.light.success : color=Colores.light.danger;
-    return ({
-        borderColor: color,
-        borderWidth: 4,
-        borderRadius: 20,
-        flexDirection: 'row',
-        width: 30,
-        height: 30,
-    })
+function order (a: Object,b: Object){
+    return a.date.localeCompare(b.date);
 }
 export function Task(){
     const [todoData,setTodoData] = useState<Array<any>>([]);
@@ -49,16 +41,20 @@ export function Task(){
                 ...data[key]
             }));
             console.log(posts);
+            posts.sort(order);
             setTodoData(posts);
         })
     },[])
+    if(todoData.length <= 0){
+        return <SinTareas></SinTareas>
+    }
     return(
         <View>
             {todoData.map((tasks,index) => {
                 return( 
                     <View key={index} style={ColorPick(tasks.colors)}>
                         <View style={styles.taskLeft}>
-                            <View style={Check(tasks.done)}></View>
+                            <Checkbox isChecked={tasks.done} label={'Hecho'}></Checkbox>
                         </View>
                         <View style={styles.taskRight}>
                             <ColorBox colores={tasks.colors}></ColorBox>
