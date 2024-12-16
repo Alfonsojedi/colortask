@@ -12,6 +12,7 @@ const List = ({ navigation} : RouterProps) => {
     return(
         <View style={styles.container}>
             <Text style={{fontSize: 40, fontWeight: 'bold', marginBottom: 40}}>Bienvenido</Text>
+            <Text style={{fontSize: 24, fontWeight: 'bold', marginBottom: 40}}>¿A dónde desea ir?</Text>
             <View style={{marginBottom: 5}}>
                 <Button title='Abrir tareas' color={Colores.light.secondary} onPress={() => navigation.navigate('Tasks')}></Button>
             </View>
