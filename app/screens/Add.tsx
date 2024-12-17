@@ -87,6 +87,12 @@ export const Add = ({navigation} : RouterProps) => {
                 onChangeText={(text) => setDesc(text)}
                 style={styles.input}
             ></TextInput>
+            <TextInput
+                placeholder='Fecha'
+                value={date}
+                onChangeText={(text) => setDate(text)}
+                style={styles.input}
+            ></TextInput>
             <Text>¿Terminaste la tarea?</Text>
             <CheckboxList
                 options={optDone} 
@@ -110,6 +116,14 @@ export const Add = ({navigation} : RouterProps) => {
                 onPress={dataAddOn}
                 color={Colores.light.secondary}
             ></Button>
+            <View>
+                <View>
+
+                </View>
+                <View>
+                    0k
+                </View>
+            </View>
             <View style={{marginTop: 5}}>
                 <Button title='Abrir tareas' color={Colores.light.secondary} onPress={() => navigation.navigate('Tasks')}></Button>
             </View>

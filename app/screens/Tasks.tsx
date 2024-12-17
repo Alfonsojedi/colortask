@@ -9,7 +9,6 @@ interface RouterProps {
     navigation: NavigationProp<any, any>;
 }
 const Tasks = ({navigation} : RouterProps) => {
-    //const [items, setItems] = useState('');
     return(
         <View style={styles.container}>
             <View style={styles.tasksPage}>
@@ -23,9 +22,7 @@ const Tasks = ({navigation} : RouterProps) => {
                     <Image source={require('@/assets/images/bell.svg')}></Image>
                 </TouchableOpacity>
             </View>
-            <View style={styles.tasks}>
-                <Task></Task>
-            </View>
+            <Task></Task>
             <View style={styles.cerrar}>
                 <Button title='Cerrar sesión' color={Colores.light.secondary} onPress={() => fire_auth.signOut()}></Button>
             </View>
@@ -55,13 +52,6 @@ const styles = StyleSheet.create({
     profile: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-    },
-    tasks: {
-        flex: 1,
-        padding: 5,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-        backgroundColor: Colores.light.background,
     },
     headTitle: {
         color: Colores.light.white,

@@ -1,7 +1,7 @@
 import { fire_auth, fire_db } from '@/FirebaseConf';
-import { onValue, ref } from 'firebase/database';
+import { onValue, ref, remove, set } from 'firebase/database';
 import { useEffect, useState } from 'react';
-import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Image, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Colores } from '@/constants/Colores';
 import ColorBox from './ColorBox';
 import { TaskText } from './TaskText';
@@ -12,9 +12,12 @@ import { NavigationProp } from '@react-navigation/native';
 export const SinTareas = () => {
     return(
         <View style={styles.noItems}>
-            <Text style={{fontSize: 32, fontWeight: 'bold'}}>No hay tareas en este día.</Text>
+            <Text style={{fontSize: 32, fontWeight: 'bold'}}>No hay tareas.</Text>
         </View>
     )
+}
+function eliminar(index: string){
+    remove(ref(fire_db,User()+'/posts/'+index))
 }
 const ColorPick = (colores='#999') => {
     return ({
@@ -31,10 +34,7 @@ const ColorPick = (colores='#999') => {
 function order(a: Object,b: Object){
     return a.date.localeCompare(b.date);
 }
-interface RouterProps {
-    navigation: NavigationProp<any, any>;
-}
-export function Task({navigation} : RouterProps){
+export function Task(){
     const [todoData,setTodoData] = useState<Array<any>>([]);
     useEffect(() => {
         const startCountRef = ref(fire_db,User()+'/posts/')
@@ -54,7 +54,7 @@ export function Task({navigation} : RouterProps){
         return <SinTareas></SinTareas>
     }
     return(
-        <View>
+        <ScrollView style={{paddingStart: 5, paddingEnd: 5}}>
             {todoData.map((tasks,index) => {
                 return( 
                     <View key={index} style={ColorPick(tasks.colors)}>
@@ -73,11 +73,11 @@ export function Task({navigation} : RouterProps){
                                 <Text style={{fontSize: 12,color: Colores.light.black}}>{tasks.desc}</Text>
                             </TaskText>
                             <TaskText stroke={1} color='#000'>
-                                <Text style={{fontSize: 16,color: Colores.light.danger}}>{tasks.prior}</Text>
+                                <Text style={tasks.prior === 'Urgente' ? {fontSize: 16,color: Colores.light.danger}: {fontSize: 16,color: Colores.light.white}}>{tasks.prior}</Text>
                             </TaskText>
                         </View>
                         <View style={styles.taskButtons}>
-                            <TouchableOpacity style={{marginRight: 5}}>
+                            <TouchableOpacity style={{marginRight: 5}} onPress={() => eliminar(tasks.name)}>
                                 <Image source={require('@/assets/images/Delete.svg')}></Image>
                             </TouchableOpacity>
                             <TouchableOpacity style={{marginRight: 5}} onPress={() => navigation.navigate('Edit')}>
@@ -87,19 +87,13 @@ export function Task({navigation} : RouterProps){
                     </View>
                 )
             })}
-        </View>
+        </ScrollView>
     )
 }
 
 export default Task;
 
 const styles = StyleSheet.create({
-    noItems: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: Colores.light.background,
-    },
     taskText: {
         color: Colores.light.background,
         fontSize: 16,

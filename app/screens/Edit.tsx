@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 import { fire_db } from '@/FirebaseConf';
-import {ref, set} from 'firebase/database';
+import {ref, set, update} from 'firebase/database';
 import { useState } from 'react';
 import { Colores } from '@/constants/Colores';
 import User from '@/constants/User';
@@ -12,7 +12,7 @@ interface RouterProps {
     navigation: NavigationProp<any, any>;
 }
 
-export const Edit = ({navigation} : RouterProps) => {
+export const Edit = ({navigation} : RouterProps, nombre: string ='prueba') => {
     const [name,setName] = useState('');
     const [desc,setDesc] = useState('');
     const [done,setDone] = useState(false);
@@ -24,7 +24,7 @@ export const Edit = ({navigation} : RouterProps) => {
     const [selectDone, setSelectDone] = useState<string[]>([]);
 
     const updateData = () => {
-        set(ref(fire_db,User()+'/posts/'+name), {
+        update(ref(fire_db,User()+'/posts/'+nombre), {
             name: name,
             desc: desc,
             done: done,
@@ -32,7 +32,7 @@ export const Edit = ({navigation} : RouterProps) => {
             colors: colors,
             date: date,
         });
-        setName('');
+        setName(nombre);
         setDesc('');
         setDone(false);
         setPrior('');
