@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { Colores } from '@/constants/Colores';
 import User from '@/constants/User';
 import Checkbox from '@/components/Checkbox';
+import CheckboxList from '@/components/CheckboxList';
 
 interface RouterProps {
     navigation: NavigationProp<any, any>;
@@ -14,10 +15,13 @@ interface RouterProps {
 export const Add = ({navigation} : RouterProps) => {
     const [name,setName] = useState('');
     const [desc,setDesc] = useState('');
-    const [done,setDone] = useState('');
+    const [done,setDone] = useState(false);
     const [prior,setPrior] = useState('');
     const [colors,setColors] = useState('');
     const [date,setDate] = useState('');
+
+    const [selectPrior, setSelectPrior] = useState<string[]>([]);
+    const [selectDone, setSelectDone] = useState<string[]>([]);
 
     const dataAddOn = () => {
         set(ref(fire_db,User()+'/posts/'+name), {
@@ -30,11 +34,44 @@ export const Add = ({navigation} : RouterProps) => {
         });
         setName('');
         setDesc('');
-        setDone('');
+        setDone(false);
         setPrior('');
         setColors('');
         setDate('');
     }
+
+    const pressedDone = (id: string) => {
+        if (selectDone.includes(id)) {
+            const newSelected = selectDone.filter(item => item !== id);
+            return setSelectDone(newSelected);
+        }
+        const result = [...selectDone, id];
+        result ? setDone(true) : setDone(false);
+        setSelectDone(result);
+    };
+    const pressedUrgente = (id: string) => {
+        if (selectPrior.includes(id)) {
+            const newSelected = selectPrior.filter(item => item !== id);
+            return setSelectPrior(newSelected);
+        }
+        const result = [...selectPrior, id];
+        result ? setPrior("Urgente") : setPrior("No importante")
+        setSelectPrior(result);
+    };
+
+    const optPrior = [
+        {
+            id:'1',
+            label: 'Urgente',
+        },
+    ];
+    const optDone = [
+        {
+            id:'1',
+            label: 'Sí',
+        },
+    ];
+
     return(
         <View style={styles.container}>
             <Text style={{fontSize: 40, fontWeight: 'bold'}}>Añadir tarea</Text>
@@ -50,18 +87,18 @@ export const Add = ({navigation} : RouterProps) => {
                 onChangeText={(text) => setDesc(text)}
                 style={styles.input}
             ></TextInput>
-            <TextInput
-                placeholder='¿Completado?'
-                value={done}
-                onChangeText={(text) => setDone(text)}
-                style={styles.input}
-            ></TextInput>
-            <TextInput
-                placeholder='Urgencia'
-                value={prior}
-                onChangeText={(text) => setPrior(text)}
-                style={styles.input}
-            ></TextInput>
+            <Text>¿Terminaste la tarea?</Text>
+            <CheckboxList
+                options={optDone} 
+                onPressCheckbox={pressedDone}
+                selectedOption={selectDone}
+            ></CheckboxList>
+            <Text>¿Es urgente?</Text>
+            <CheckboxList
+                options={optPrior} 
+                onPressCheckbox={pressedUrgente}
+                selectedOption={selectPrior}
+            ></CheckboxList>
             <TextInput
                 placeholder='Color'
                 value={colors}

@@ -7,6 +7,7 @@ import ColorBox from './ColorBox';
 import { TaskText } from './TaskText';
 import User from '@/constants/User';
 import Checkbox from '@/components/Checkbox';
+import { NavigationProp } from '@react-navigation/native';
 
 export const SinTareas = () => {
     return(
@@ -27,10 +28,13 @@ const ColorPick = (colores='#999') => {
         
     })
 }
-function order (a: Object,b: Object){
+function order(a: Object,b: Object){
     return a.date.localeCompare(b.date);
 }
-export function Task(){
+interface RouterProps {
+    navigation: NavigationProp<any, any>;
+}
+export function Task({navigation} : RouterProps){
     const [todoData,setTodoData] = useState<Array<any>>([]);
     useEffect(() => {
         const startCountRef = ref(fire_db,User()+'/posts/')
@@ -40,7 +44,6 @@ export function Task(){
                 id: key,
                 ...data[key]
             }));
-            console.log(posts);
             posts.sort(order);
             setTodoData(posts);
         })
@@ -54,7 +57,7 @@ export function Task(){
                 return( 
                     <View key={index} style={ColorPick(tasks.colors)}>
                         <View style={styles.taskLeft}>
-                            <Checkbox isChecked={tasks.done} label={'Hecho'}></Checkbox>
+                            <Checkbox isChecked={tasks.done} label={''}></Checkbox>
                         </View>
                         <View style={styles.taskRight}>
                             <ColorBox colores={tasks.colors}></ColorBox>
@@ -75,7 +78,7 @@ export function Task(){
                             <TouchableOpacity style={{marginRight: 5}}>
                                 <Image source={require('@/assets/images/Delete.svg')}></Image>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{marginRight: 5}}>
+                            <TouchableOpacity style={{marginRight: 5}} onPress={() => navigation.navigate('Edit')}>
                                 <Image source={require('@/assets/images/Edit.svg')}></Image>
                             </TouchableOpacity>
                         </View>

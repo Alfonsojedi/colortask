@@ -19,11 +19,11 @@ const checkStyle = StyleSheet.create({
   },
   checked: {
     backgroundColor: Colores.light.success,
-    borderColor: '#008844',
+    borderColor: Colores.light.outline,
   },
   label: {
     fontSize: 16,
-    color: '#656565',
+    color: Colores.light.black,
   },
   labelChecked: {
     color: '#06744F',

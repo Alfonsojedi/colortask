@@ -7,6 +7,7 @@ import Login from './screens/Login';
 import List from './screens/List';
 import Tasks from './screens/Tasks';
 import Add from './screens/Add';
+import Edit from './screens/Edit';
 
 const Stack = createNativeStackNavigator();
 const InsideStack = createNativeStackNavigator();
