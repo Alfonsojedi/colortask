@@ -61,11 +61,11 @@ export function Task({navigation} : RouterProps){
                         </View>
                         <View style={styles.taskRight}>
                             <ColorBox colores={tasks.colors}></ColorBox>
-                            <TaskText stroke={1} color='#fff'>
-                                <Text style={{fontSize: 20,color: Colores.light.black}}>{tasks.name}</Text>
-                            </TaskText>
                             <TaskText stroke={1} color='#000'>
                                 <Text style={{fontSize: 12,color: Colores.light.success}}>{tasks.date}</Text>
+                            </TaskText>
+                            <TaskText stroke={1} color='#fff'>
+                                <Text style={{fontSize: 20,color: Colores.light.black}}>{tasks.name}</Text>
                             </TaskText>
                             <TaskText stroke={1} color='#fff'>
                                 <Text style={{fontSize: 12,color: Colores.light.black}}>{tasks.desc}</Text>

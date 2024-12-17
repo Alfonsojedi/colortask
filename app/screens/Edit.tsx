@@ -1,45 +1,80 @@
 import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
-
 import { fire_db } from '@/FirebaseConf';
 import {ref, set} from 'firebase/database';
 import { useState } from 'react';
 import { Colores } from '@/constants/Colores';
 import User from '@/constants/User';
 import Checkbox from '@/components/Checkbox';
+import CheckboxList from '@/components/CheckboxList';
 
 interface RouterProps {
     navigation: NavigationProp<any, any>;
 }
 
-export const Edit = ({ navigation} : RouterProps) => {
-    //Obtener datos
+export const Edit = ({navigation} : RouterProps) => {
     const [name,setName] = useState('');
     const [desc,setDesc] = useState('');
-    const [done,setDone] = useState('');
+    const [done,setDone] = useState(false);
     const [prior,setPrior] = useState('');
     const [colors,setColors] = useState('');
     const [date,setDate] = useState('');
 
+    const [selectPrior, setSelectPrior] = useState<string[]>([]);
+    const [selectDone, setSelectDone] = useState<string[]>([]);
+
     const updateData = () => {
-        set(ref(fire_db,User()+'/posts/'+name),{
+        set(ref(fire_db,User()+'/posts/'+name), {
             name: name,
             desc: desc,
             done: done,
             prior: prior,
             colors: colors,
             date: date,
-        })
+        });
         setName('');
         setDesc('');
-        setDone('');
+        setDone(false);
         setPrior('');
         setColors('');
         setDate('');
     }
+
+    const pressedDone = (id: string) => {
+        if (selectDone.includes(id)) {
+            const newSelected = selectDone.filter(item => item !== id);
+            return setSelectDone(newSelected);
+        }
+        const result = [...selectDone, id];
+        result ? setDone(true) : setDone(false);
+        setSelectDone(result);
+    };
+    const pressedUrgente = (id: string) => {
+        if (selectPrior.includes(id)) {
+            const newSelected = selectPrior.filter(item => item !== id);
+            return setSelectPrior(newSelected);
+        }
+        const result = [...selectPrior, id];
+        result ? setPrior("Urgente") : setPrior("No importante")
+        setSelectPrior(result);
+    };
+
+    const optPrior = [
+        {
+            id:'1',
+            label: 'Urgente',
+        },
+    ];
+    const optDone = [
+        {
+            id:'1',
+            label: 'Sí',
+        },
+    ];
+
     return(
         <View style={styles.container}>
-            <Text style={{fontSize: 40, fontWeight: 'bold'}}>Editar tarea</Text>
+            <Text style={{fontSize: 40, fontWeight: 'bold'}}>Añadir tarea</Text>
             <TextInput
                 placeholder='Nombre'
                 value={name}
@@ -52,18 +87,18 @@ export const Edit = ({ navigation} : RouterProps) => {
                 onChangeText={(text) => setDesc(text)}
                 style={styles.input}
             ></TextInput>
-            <TextInput
-                placeholder='¿Completado?'
-                value={done}
-                onChangeText={(text) => setDone(text)}
-                style={styles.input}
-            ></TextInput>
-            <TextInput
-                placeholder='Urgencia'
-                value={prior}
-                onChangeText={(text) => setPrior(text)}
-                style={styles.input}
-            ></TextInput>
+            <Text>¿Terminaste la tarea?</Text>
+            <CheckboxList
+                options={optDone} 
+                onPressCheckbox={pressedDone}
+                selectedOption={selectDone}
+            ></CheckboxList>
+            <Text>¿Es urgente?</Text>
+            <CheckboxList
+                options={optPrior} 
+                onPressCheckbox={pressedUrgente}
+                selectedOption={selectPrior}
+            ></CheckboxList>
             <TextInput
                 placeholder='Color'
                 value={colors}
@@ -71,12 +106,12 @@ export const Edit = ({ navigation} : RouterProps) => {
                 style={styles.input}
             ></TextInput>
             <Button
-                title='Editar tarea'
+                title='Actualizar'
                 onPress={() => updateData()}
                 color={Colores.light.secondary}
             ></Button>
             <View style={{marginTop: 5}}>
-                <Button title='Volver' color={Colores.light.secondary} onPress={() => navigation.navigate('Tasks')}></Button>
+                <Button title='Abrir tareas' color={Colores.light.secondary} onPress={() => navigation.navigate('Tasks')}></Button>
             </View>
         </View>
     )
