@@ -44,7 +44,9 @@ export function Task({navigation} : RouterProps){
                 id: key,
                 ...data[key]
             }));
-            posts.sort(order);
+            if(posts.length>1){
+                posts.sort(order); 
+            }
             setTodoData(posts);
         })
     },[])

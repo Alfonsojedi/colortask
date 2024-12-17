@@ -26,7 +26,6 @@ export default function HomeScreen() {
   const [user,setUser] = useState<User | null>(null);
   useEffect(() => {
     onAuthStateChanged(fire_auth, (user) => {
-      console.log('user',user);
       setUser(user);
     })
   })
