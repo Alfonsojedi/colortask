@@ -1,3 +1,4 @@
+import { Colores } from '@/constants/Colores'
 import { View, Text, StyleSheet } from 'react-native'
 
 export function SinTareas() {

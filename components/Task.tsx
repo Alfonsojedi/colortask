@@ -8,14 +8,9 @@ import { TaskText } from './TaskText';
 import User from '@/constants/User';
 import Checkbox from '@/components/Checkbox';
 import { NavigationProp } from '@react-navigation/native';
+import { SinTareas } from './SinTareas';
 
-export const SinTareas = () => {
-    return(
-        <View style={styles.noItems}>
-            <Text style={{fontSize: 32, fontWeight: 'bold'}}>No hay tareas.</Text>
-        </View>
-    )
-}
+
 function eliminar(index: string){
     remove(ref(fire_db,User()+'/posts/'+index))
 }

@@ -1,12 +1,14 @@
-import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Button, TextInput, Dimensions, Animated, ScrollView } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 import { fire_db } from '@/FirebaseConf';
 import {ref, set} from 'firebase/database';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Colores } from '@/constants/Colores';
 import User from '@/constants/User';
-import Checkbox from '@/components/Checkbox';
 import CheckboxList from '@/components/CheckboxList';
+import { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { ColorPicker } from 'react-native-color-picker';
 
 interface RouterProps {
     navigation: NavigationProp<any, any>;
@@ -71,9 +73,9 @@ export const Add = ({navigation} : RouterProps) => {
             label: 'Sí',
         },
     ];
-
+    //return StyleSheet.create({ backgroundColor: pickedColor.value})
     return(
-        <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.container}>
             <Text style={{fontSize: 40, fontWeight: 'bold'}}>Añadir tarea</Text>
             <TextInput
                 placeholder='Nombre'
@@ -88,7 +90,7 @@ export const Add = ({navigation} : RouterProps) => {
                 style={styles.input}
             ></TextInput>
             <TextInput
-                placeholder='Fecha'
+                placeholder='Fecha (YYYY-MM-DD)'
                 value={date}
                 onChangeText={(text) => setDate(text)}
                 style={styles.input}
@@ -107,7 +109,7 @@ export const Add = ({navigation} : RouterProps) => {
             ></CheckboxList>
             <TextInput
                 placeholder='Color'
-                value={colors}
+                value={color}
                 onChangeText={(text) => setColors(text)}
                 style={styles.input}
             ></TextInput>
@@ -116,18 +118,10 @@ export const Add = ({navigation} : RouterProps) => {
                 onPress={dataAddOn}
                 color={Colores.light.secondary}
             ></Button>
-            <View>
-                <View>
-
-                </View>
-                <View>
-                    0k
-                </View>
-            </View>
             <View style={{marginTop: 5}}>
                 <Button title='Abrir tareas' color={Colores.light.secondary} onPress={() => navigation.navigate('Tasks')}></Button>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 
@@ -147,5 +141,5 @@ const styles =  StyleSheet.create({
         borderRadius: 4,
         padding: 10,
         backgroundColor: Colores.light.white,
-    },
+    }
 });

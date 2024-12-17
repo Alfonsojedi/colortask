@@ -1,4 +1,5 @@
 import React from 'react';
+import notifee from '@notifee/react-native'
 import { View, Text, Image, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 import { fire_auth } from '@/FirebaseConf';
@@ -8,6 +9,20 @@ import Task from '@/components/Task';
 interface RouterProps {
     navigation: NavigationProp<any, any>;
 }
+async function onDisplayNotification() {
+    const channelId = await notifee.createChannel({
+        id: 'default',
+        name: 'Default Chanel',
+    });
+    await notifee.displayNotification({
+        title: 'Colortask',
+        body: 'Colortask puede enviarte notificaciones',
+        android: {
+            channelId,
+        }
+    })
+}
+
 const Tasks = ({navigation} : RouterProps) => {
     return(
         <View style={styles.container}>
@@ -18,7 +33,7 @@ const Tasks = ({navigation} : RouterProps) => {
                         <Text style={styles.headText}>Tareas a completar</Text>
                     </View>
                 </View>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={onDisplayNotification()}>
                     <Image source={require('@/assets/images/bell.svg')}></Image>
                 </TouchableOpacity>
             </View>
