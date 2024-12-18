@@ -45,9 +45,8 @@ export function Task(){
             setTodoData(posts);
         })
     },[])
-    if(todoData.length <= 0){
-        return <SinTareas></SinTareas>
-    }
+
+    if(todoData.length <= 0){return <SinTareas></SinTareas>}
     return(
         <ScrollView style={{paddingStart: 5, paddingEnd: 5}}>
             {todoData.map((tasks,index) => {
@@ -82,6 +81,7 @@ export function Task(){
                     </View>
                 )
             })}
+            <View style={{height: 15}}></View>
         </ScrollView>
     )
 }

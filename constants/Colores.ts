@@ -4,13 +4,13 @@ const tintColorDark = '#fff';
 export const Colores = {
     light: {
       text: '#112',
-      background: '#bcd',
-      secondary: '#d72',
+      background: '#abc',
+      secondary: '#d73',
       white: '#fff',
       black: '#000',
-      danger: '#d21',
+      danger: '#c20',
       warning: '#eb2',
-      success: '#0c4',
+      success: '#2a4',
       outline: '#0008',
       outlineLight: '#fff4',
 

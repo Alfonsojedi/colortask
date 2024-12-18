@@ -24,6 +24,7 @@ async function onDisplayNotification() {
 }
 
 const Tasks = ({navigation} : RouterProps) => {
+
     return(
         <View style={styles.container}>
             <View style={styles.tasksPage}>

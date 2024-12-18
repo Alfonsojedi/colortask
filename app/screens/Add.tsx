@@ -24,6 +24,7 @@ export const Add = ({navigation} : RouterProps) => {
 
     const [selectPrior, setSelectPrior] = useState<string[]>([]);
     const [selectDone, setSelectDone] = useState<string[]>([]);
+    const [selectColors, setSelectColors] = useState<string[]>([]);
 
     const dataAddOn = () => {
         set(ref(fire_db,User()+'/posts/'+name), {
@@ -60,6 +61,15 @@ export const Add = ({navigation} : RouterProps) => {
         result ? setPrior("Urgente") : setPrior("No importante")
         setSelectPrior(result);
     };
+    const pressedColors = (id: string) => {
+        if (selectColors.includes(id)) {
+            const newSelected = selectColors.filter(item => item !== id);
+            return setSelectColors(newSelected);
+        }
+        const result = [...selectColors, id];
+        setColors(result[0])
+        setSelectColors(result);
+    };
 
     const optPrior = [
         {
@@ -73,7 +83,32 @@ export const Add = ({navigation} : RouterProps) => {
             label: 'Sí',
         },
     ];
-    //return StyleSheet.create({ backgroundColor: pickedColor.value})
+    const optColors = [
+        {
+            id:'#E00',
+            label: 'Rojo',
+        },
+        {
+            id:'#CC0',
+            label: 'Amarillo',
+        },
+        {
+            id:'#0E0',
+            label: 'Verde',
+        },
+        {
+            id:'#0CC',
+            label: 'Azul claro',
+        },
+        {
+            id:'#00E',
+            label: 'Azul',
+        },
+        {
+            id:'#C0C',
+            label: 'Morado',
+        },
+    ]
     return(
         <ScrollView contentContainerStyle={styles.container}>
             <Text style={{fontSize: 40, fontWeight: 'bold'}}>Añadir tarea</Text>
@@ -107,12 +142,12 @@ export const Add = ({navigation} : RouterProps) => {
                 onPressCheckbox={pressedUrgente}
                 selectedOption={selectPrior}
             ></CheckboxList>
-            <TextInput
-                placeholder='Color'
-                value={color}
-                onChangeText={(text) => setColors(text)}
-                style={styles.input}
-            ></TextInput>
+            <Text>¿Qué color quieres?</Text>
+            <CheckboxList
+                options={optColors} 
+                onPressCheckbox={pressedColors}
+                selectedOption={selectColors}
+            ></CheckboxList>
             <Button
                 title='Añadir tarea'
                 onPress={dataAddOn}
