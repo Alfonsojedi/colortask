@@ -9,6 +9,7 @@ import User from '@/constants/User';
 import Checkbox from '@/components/Checkbox';
 import { NavigationProp } from '@react-navigation/native';
 import { SinTareas } from './SinTareas';
+import CheckboxList from './CheckboxList';
 
 
 function eliminar(index: string){
@@ -31,6 +32,18 @@ function order(a: Object,b: Object){
 }
 export function Task(){
     const [todoData,setTodoData] = useState<Array<any>>([]);
+    const [mostrar, setMostrar] = useState(true);
+    const [mostrador, setMostrador] = useState<string[]>([]);
+    const mostradorFunction = (id: string) => {
+        if (mostrador.includes(id)) {
+            const newSelected = mostrador.filter(item => item !== id);
+            return setMostrador(newSelected);
+        }
+        const result = [...mostrador, id];
+        result ? setMostrar(true) : setMostrar(false);
+        setMostrador(result);
+    };
+
     useEffect(() => {
         const startCountRef = ref(fire_db,User()+'/posts/')
         try{
@@ -51,9 +64,16 @@ export function Task(){
     },[])
 
     if(todoData.length <= 0 || todoData == null){return <SinTareas></SinTareas>}
+    //mostrador? setTodoData(todoData.filter((tasks) => { tasks.done!=true})): setTodoData(todoData)
     return(
         <ScrollView style={{paddingStart: 5, paddingEnd: 5}}>
-            {todoData.map((tasks,index) => {
+            <CheckboxList
+                options={[{id: '1', label: 'Mostrar completados'}]} 
+                onPressCheckbox={mostradorFunction}
+                selectedOption={mostrador}
+            />
+            {
+            todoData.map((tasks,index) => {
                 return( 
                     <View key={index} style={ColorPick(tasks.colors)}>
                         <View style={styles.taskLeft}>

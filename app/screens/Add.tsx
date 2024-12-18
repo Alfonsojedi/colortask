@@ -7,9 +7,9 @@ import DateTimePicker from 'react-native-ui-datepicker'
 import { Colores } from '@/constants/Colores';
 import User from '@/constants/User';
 import CheckboxList from '@/components/CheckboxList';
+import dayjs from 'dayjs'
 import { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { ColorPicker } from 'react-native-color-picker';
 
 interface RouterProps {
     navigation: NavigationProp<any, any>;
@@ -27,6 +27,11 @@ export const Add = ({navigation} : RouterProps) => {
     const [selectDone, setSelectDone] = useState<string[]>([]);
     const [selectColors, setSelectColors] = useState<string[]>([]);
 
+    const [time, setTime] = useState(dayjs())
+    const setDates = (date: React.SetStateAction<dayjs.Dayjs> | any) => {
+        setDate(date.date.toString());
+        setTime(date.date);
+    }
     const dataAddOn = () => {
         set(ref(fire_db,User()+'/posts/'+name), {
             name: name,
@@ -57,7 +62,7 @@ export const Add = ({navigation} : RouterProps) => {
         setDone(false);
         setPrior('');
         setColors('');
-        setDate('');
+        setDate(date);
     }
 
     const pressedDone = (id: string) => {
@@ -129,6 +134,13 @@ export const Add = ({navigation} : RouterProps) => {
     return(
         <ScrollView contentContainerStyle={styles.container}>
             <Text style={{fontSize: 30, fontWeight: 'bold'}}>Añadir o editar tarea</Text>
+            <View style={{ scaleY: 0.3,width: '60%', borderRadius: 20 ,backgroundColor: Colores.light.outlineLight}}>
+                <DateTimePicker
+                    mode='single'
+                    date={time}
+                    onChange={(date) => setDates(date)}
+                />
+            </View>
             <TextInput
                 placeholder='Nombre'
                 value={name}
@@ -141,14 +153,6 @@ export const Add = ({navigation} : RouterProps) => {
                 onChangeText={(text) => setDesc(text)}
                 style={styles.input}
             ></TextInput>
-            <TextInput
-                placeholder='Fecha (YYYY-MM-DD)'
-                value={date}
-                onChangeText={(text) => setDate(text)}
-                style={styles.input}
-            ></TextInput>
-            <DateTimePicker
-            />
             <Text style={styles.text}>¿Terminaste la tarea?</Text>
             <CheckboxList
                 options={optDone} 
@@ -188,7 +192,6 @@ export default Add;
 
 const styles =  StyleSheet.create({
     container: {
-      flex: 1,
       backgroundColor: Colores.light.background,
       justifyContent: 'center',
       alignItems: 'center',
