@@ -2,7 +2,6 @@ import React from 'react';
 import {Pressable, View} from 'react-native';
 import Checkbox from './Checkbox';
 
-
 type CheckboxListProps = {
   options: {
     id: string;
@@ -20,13 +19,12 @@ function CheckboxList({
   if (!options || options.length === 0) {
     return null;
   }
-
   return (
     <View>
       {options.map(option => (
         <Pressable
           onPress={() => onPressCheckbox(option.id)}
-          style={{marginBottom: 10}}>
+          style={{marginBottom: 4}}>
           <Checkbox
             key={option.id}
             label={option.label}

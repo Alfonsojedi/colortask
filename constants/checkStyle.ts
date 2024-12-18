@@ -8,8 +8,8 @@ const checkStyle = StyleSheet.create({
     gap: 15,
   },
   check: {
-    width: 30,
-    height: 30,
+    width: 28,
+    height: 28,
     borderRadius: 10,
     backgroundColor: '#EEE',
     borderColor: '#444',

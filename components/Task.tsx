@@ -33,6 +33,7 @@ export function Task(){
     const [todoData,setTodoData] = useState<Array<any>>([]);
     useEffect(() => {
         const startCountRef = ref(fire_db,User()+'/posts/')
+        try{
         onValue(startCountRef, (snapshot) => {
             const data = snapshot.val();
             const posts = Object.keys(data).map(key => ({
@@ -44,9 +45,12 @@ export function Task(){
             }
             setTodoData(posts);
         })
+        } catch{
+            console.log('Sin tareas')
+        }
     },[])
 
-    if(todoData.length <= 0){return <SinTareas></SinTareas>}
+    if(todoData.length <= 0 || todoData == null){return <SinTareas></SinTareas>}
     return(
         <ScrollView style={{paddingStart: 5, paddingEnd: 5}}>
             {todoData.map((tasks,index) => {

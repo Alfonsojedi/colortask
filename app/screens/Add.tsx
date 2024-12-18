@@ -130,19 +130,19 @@ export const Add = ({navigation} : RouterProps) => {
                 onChangeText={(text) => setDate(text)}
                 style={styles.input}
             ></TextInput>
-            <Text>¿Terminaste la tarea?</Text>
+            <Text style={styles.text}>¿Terminaste la tarea?</Text>
             <CheckboxList
                 options={optDone} 
                 onPressCheckbox={pressedDone}
                 selectedOption={selectDone}
             ></CheckboxList>
-            <Text>¿Es urgente?</Text>
+            <Text style={styles.text}>¿Es urgente?</Text>
             <CheckboxList
                 options={optPrior} 
                 onPressCheckbox={pressedUrgente}
                 selectedOption={selectPrior}
             ></CheckboxList>
-            <Text>¿Qué color quieres?</Text>
+            <Text style={styles.text}>¿Qué color quieres?</Text>
             <CheckboxList
                 options={optColors} 
                 onPressCheckbox={pressedColors}
@@ -176,5 +176,9 @@ const styles =  StyleSheet.create({
         borderRadius: 4,
         padding: 10,
         backgroundColor: Colores.light.white,
+    },
+    text: {
+        fontSize: 20,
+        fontWeight: 'bold',
     }
 });
