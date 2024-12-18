@@ -17,6 +17,7 @@ function InsideLayout() {
     <InsideStack.Navigator>
       <InsideStack.Screen name="List" component={List} options={{headerShown: false}}></InsideStack.Screen>
       <InsideStack.Screen name="Add" component={Add} options={{headerShown: false}}></InsideStack.Screen>
+      <InsideStack.Screen name="Edit" component={Edit} options={{headerShown: false}}></InsideStack.Screen>
       <InsideStack.Screen name="Tasks" component={Tasks} options={{headerShown: false}}></InsideStack.Screen>
     </InsideStack.Navigator>
   )

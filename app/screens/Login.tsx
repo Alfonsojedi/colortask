@@ -9,13 +9,14 @@ const Login = () => {
   const [password,setPassword] = useState('');
   const [loading,setLoading] = useState(false);
   const auth = fire_auth;
+  const [errorMsg,setErrorMsg] = useState<any>('');
   const signIn = async () => {
     setLoading(true);
     try{
       const response = await signInWithEmailAndPassword(auth,email,password);
     }catch (error){
       console.log(error);
-      alert('Hubo un error al entrar. Compruebe sus datos:\n'+error)
+      setErrorMsg('Hubo un error al entrar. Compruebe sus datos:\n'+error);
     }finally{
       setLoading(false);
     }
@@ -26,7 +27,7 @@ const Login = () => {
       const response = await createUserWithEmailAndPassword(auth, email,password);
     }catch (error){
       console.log(error);
-      alert('Hubo un error al registrarse. Compruebe sus datos:\n'+error)
+      setErrorMsg('Hubo un error al registrarse. Compruebe sus datos:\n'+error);
     }finally{
       setLoading(false);
     }
@@ -37,6 +38,7 @@ const Login = () => {
     <Text style={styles.title}>Colortask</Text>
     <TextInput value={email} style={styles.input} placeholder='E-mail' onChangeText={(text) => setEmail(text)}></TextInput>
     <TextInput secureTextEntry={true} value={password} style={styles.input} placeholder='Contraseña' autoCapitalize='none' onChangeText={(text) => setPassword(text)}></TextInput>
+    <Text style={{color: Colores.light.danger, fontWeight: 'bold'}}>{errorMsg}</Text>
     {loading ? 
       <ActivityIndicator size="large" color={Colores.light.secondary}></ActivityIndicator>
       :

@@ -1,8 +1,9 @@
 import { View, Text, StyleSheet, Button, TextInput, Dimensions, Animated, ScrollView } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 import { fire_db } from '@/FirebaseConf';
-import {ref, set} from 'firebase/database';
-import { useCallback, useState } from 'react';
+import {ref, set, update} from 'firebase/database';
+import React, { useCallback, useState } from 'react';
+import DateTimePicker from 'react-native-ui-datepicker'
 import { Colores } from '@/constants/Colores';
 import User from '@/constants/User';
 import CheckboxList from '@/components/CheckboxList';
@@ -42,6 +43,22 @@ export const Add = ({navigation} : RouterProps) => {
         setColors('');
         setDate('');
     }
+    const dataUpdateOn = () => {
+        update(ref(fire_db,User()+'/posts/'+name), {
+            name: name,
+            desc: desc,
+            done: done,
+            prior: prior,
+            colors: colors,
+            date: date,
+        });
+        setName('');
+        setDesc('');
+        setDone(false);
+        setPrior('');
+        setColors('');
+        setDate('');
+    }
 
     const pressedDone = (id: string) => {
         if (selectDone.includes(id)) {
@@ -58,7 +75,7 @@ export const Add = ({navigation} : RouterProps) => {
             return setSelectPrior(newSelected);
         }
         const result = [...selectPrior, id];
-        result ? setPrior("Urgente") : setPrior("No importante")
+        result ? setPrior('Urgente') : setPrior('No importante')
         setSelectPrior(result);
     };
     const pressedColors = (id: string) => {
@@ -111,7 +128,7 @@ export const Add = ({navigation} : RouterProps) => {
     ]
     return(
         <ScrollView contentContainerStyle={styles.container}>
-            <Text style={{fontSize: 40, fontWeight: 'bold'}}>Añadir tarea</Text>
+            <Text style={{fontSize: 30, fontWeight: 'bold'}}>Añadir o editar tarea</Text>
             <TextInput
                 placeholder='Nombre'
                 value={name}
@@ -130,6 +147,8 @@ export const Add = ({navigation} : RouterProps) => {
                 onChangeText={(text) => setDate(text)}
                 style={styles.input}
             ></TextInput>
+            <DateTimePicker
+            />
             <Text style={styles.text}>¿Terminaste la tarea?</Text>
             <CheckboxList
                 options={optDone} 
@@ -152,6 +171,11 @@ export const Add = ({navigation} : RouterProps) => {
                 title='Añadir tarea'
                 onPress={dataAddOn}
                 color={Colores.light.secondary}
+            ></Button>
+            <Button
+                title='Actualizar tarea'
+                onPress={dataUpdateOn}
+                color={Colores.light.warning}
             ></Button>
             <View style={{marginTop: 5}}>
                 <Button title='Abrir tareas' color={Colores.light.secondary} onPress={() => navigation.navigate('Tasks')}></Button>

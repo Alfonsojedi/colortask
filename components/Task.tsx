@@ -71,7 +71,7 @@ export function Task(){
                                 <Text style={{fontSize: 12,color: Colores.light.black}}>{tasks.desc}</Text>
                             </TaskText>
                             <TaskText stroke={1} color='#000'>
-                                <Text style={tasks.prior === 'Urgente' ? {fontSize: 16,color: Colores.light.danger}: {fontSize: 16,color: Colores.light.white}}>{tasks.prior}</Text>
+                                <Text style={tasks.prior==='Urgente'?{fontSize: 16,color: Colores.light.danger}:{fontSize: 16,color: Colores.light.white}}>{tasks.prior}</Text>
                             </TaskText>
                         </View>
                         <View style={styles.taskButtons}>

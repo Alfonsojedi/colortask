@@ -20,7 +20,7 @@ const List = ({ navigation} : RouterProps) => {
                     <Button title='Abrir tareas' color={Colores.light.success} onPress={() => navigation.navigate('Tasks')}></Button>
                 </View>
                 <View style={{marginBottom: 5}}>
-                    <Button title='Añadir tareas' color={Colores.light.success} onPress={() => navigation.navigate('Add')}></Button>
+                    <Button title='Añadir/Editar tareas' color={Colores.light.success} onPress={() => navigation.navigate('Add')}></Button>
                 </View>
                 <View style={{marginBottom: 5}}>
                     <Button title='Cerrar sesión' color={Colores.light.danger} onPress={() => fire_auth.signOut()}></Button>

@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     headText: {
-        color: Colores.light.background,
+        color: Colores.light.outline,
         fontSize: 16,
         fontWeight: 'bold',
     },
