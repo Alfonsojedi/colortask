@@ -10,6 +10,7 @@ import Checkbox from '@/components/Checkbox';
 import { NavigationProp } from '@react-navigation/native';
 import { SinTareas } from './SinTareas';
 import CheckboxList from './CheckboxList';
+import { taskStyle } from '@/constants/TaskStyle';
 
 
 function eliminar(index: string){
@@ -76,25 +77,27 @@ export function Task(){
             todoData.map((tasks,index) => {
                 return( 
                     <View key={index} style={ColorPick(tasks.colors)}>
-                        <View style={styles.taskLeft}>
+                        <View style={taskStyle.taskLeft}>
                             <Checkbox isChecked={tasks.done} label={''}></Checkbox>
                         </View>
-                        <View style={styles.taskRight}>
-                            <ColorBox colores={tasks.colors}></ColorBox>
-                            <TaskText stroke={1} color='#000'>
-                                <Text style={{fontSize: 12,color: Colores.light.success}}>{tasks.date}</Text>
+                        <View style={taskStyle.taskRight}>
+                            <View>
+                                <ColorBox colores={tasks.colors}></ColorBox>
+                            </View>
+                            <TaskText stroke={1} color='#fff8'>
+                                <Text style={{fontSize: 20,color: Colores.light.black}}>{tasks.date}</Text>
                             </TaskText>
-                            <TaskText stroke={1} color='#fff'>
-                                <Text style={{fontSize: 20,color: Colores.light.black}}>{tasks.name}</Text>
+                            <TaskText stroke={1} color='#fff8'>
+                                <Text style={{fontSize: 24,color: Colores.light.black}}>{tasks.name}</Text>
                             </TaskText>
-                            <TaskText stroke={1} color='#fff'>
-                                <Text style={{fontSize: 12,color: Colores.light.black}}>{tasks.desc}</Text>
+                            <TaskText stroke={1} color='#fff8'>
+                                <Text style={{fontSize: 14,color: Colores.light.black}}>{tasks.desc}</Text>
                             </TaskText>
-                            <TaskText stroke={1} color='#000'>
-                                <Text style={tasks.prior==='Urgente'?{fontSize: 16,color: Colores.light.danger}:{fontSize: 16,color: Colores.light.white}}>{tasks.prior}</Text>
+                            <TaskText stroke={1} color='#0008'>
+                                <Text style={tasks.prior==='Urgente'?{fontSize: 24,color: Colores.light.danger}:{fontSize: 16,color: Colores.light.white}}>{tasks.prior}</Text>
                             </TaskText>
                         </View>
-                        <View style={styles.taskButtons}>
+                        <View style={taskStyle.taskButtons}>
                             <TouchableOpacity style={{marginRight: 5}} onPress={() => eliminar(tasks.name)}>
                                 <Image source={require('@/assets/images/Delete.svg')}></Image>
                             </TouchableOpacity>
@@ -111,31 +114,3 @@ export function Task(){
 }
 
 export default Task;
-
-const styles = StyleSheet.create({
-    taskText: {
-        color: Colores.light.background,
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    taskLeft: {
-        width: 50,
-        backgroundColor: Colores.light.secondary,
-        borderTopLeftRadius: 8,
-        borderBottomLeftRadius: 8,
-        alignContent:'center',
-        justifyContent: 'center',
-        padding: 10,
-    },
-    taskRight: {
-        borderLeftWidth: 2,
-        borderColor: Colores.light.outline,
-        padding: 5,
-        maxWidth: '70%',
-    },
-    taskButtons: {
-        flex: 1,
-        flexDirection: 'row-reverse',
-        alignItems: 'center',
-    }
-});

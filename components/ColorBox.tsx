@@ -8,8 +8,8 @@ const Boxer = (color: string) => {
         borderColor: Colores.light.outline,
         borderWidth: 3,
         flexDirection: 'row',
-        width: 20,
-        height: 20,
+        width: 24,
+        height: 24,
         marginRight: 5,
     })
 }
