@@ -10,7 +10,7 @@ import Checkbox from '@/components/Checkbox';
 import { NavigationProp } from '@react-navigation/native';
 import { SinTareas } from './SinTareas';
 import CheckboxList from './CheckboxList';
-import { taskStyle } from '@/constants/TaskStyle';
+import { taskStyle } from '@/constants/taskStyle';
 
 
 function eliminar(index: string){

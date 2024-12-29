@@ -8,7 +8,7 @@ export const taskStyle = StyleSheet.create({
         fontWeight: 'bold',
     },
     taskLeft: {
-        width: 50,
+        width: 48,
         backgroundColor: Colores.light.secondary,
         borderTopLeftRadius: 8,
         borderBottomLeftRadius: 8,
