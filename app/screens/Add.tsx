@@ -29,7 +29,8 @@ export const Add = ({navigation} : RouterProps) => {
 
     const [time, setTime] = useState(dayjs())
     const setDates = (date: React.SetStateAction<dayjs.Dayjs> | any) => {
-        setDate(date.date.toString());
+        
+        setDate(date.date.toLocaleString());
         setTime(date.date);
     }
     const dataAddOn = () => {
@@ -62,7 +63,7 @@ export const Add = ({navigation} : RouterProps) => {
         setDone(false);
         setPrior('');
         setColors('');
-        setDate(date);
+        setDate('');
     }
 
     const pressedDone = (id: string) => {
@@ -132,9 +133,9 @@ export const Add = ({navigation} : RouterProps) => {
         },
     ]
     return(
-        <View style={{minHeight: '100%',backgroundColor: Colores.light.background}}>
-            <ScrollView contentContainerStyle={styles.container}>
-                <Text style={{fontSize: 30, fontWeight: 'bold', textAlign: 'center'}}>Añadir o editar tarea</Text>
+        <ScrollView contentContainerStyle={styles.container}>
+            <View style={{minHeight: '100%',backgroundColor: Colores.light.background}}>
+                <Text style={{fontSize: 30, fontWeight: 'bold', textAlign: 'center'}}>Añadir tarea</Text>
                 <View style={{display: 'flex', alignItems: 'center'}}>
                     <View style={{scaleY: 0.2, width: '75%', borderRadius: 20 ,backgroundColor: Colores.light.outlineLight}}>
                         <DateTimePicker
@@ -155,7 +156,7 @@ export const Add = ({navigation} : RouterProps) => {
                     </View>
                 </View>
                 <View style={{display: 'flex', flexDirection: 'row', width: '90%', alignSelf: 'center'}}>
-                    <View style={{width: '50%',paddingEnd: 5}}>
+                    <View style={{width: '40%',paddingEnd: 5}}>
                         <Text style={styles.text}>Nombre</Text>
                         <TextInput
                             placeholder='Nombre'
@@ -164,7 +165,7 @@ export const Add = ({navigation} : RouterProps) => {
                             style={styles.input}
                         ></TextInput>
                     </View>
-                    <View style={{width: '50%'}}>
+                    <View style={{width: '60%'}}>
                         <Text style={styles.text}>Descripción</Text>
                         <TextInput
                             placeholder='Descripción'
@@ -217,13 +218,6 @@ export const Add = ({navigation} : RouterProps) => {
                         ></Button>
                     </View>
                     <View style={{padding: 5}}>
-                        <Button
-                            title='Actualizar tarea'
-                            onPress={dataUpdateOn}
-                            color={Colores.light.warning}
-                        ></Button>
-                    </View>
-                    <View style={{padding: 5}}>
                     <Button
                         title='Abrir tareas'
                         color={Colores.light.secondary} 
@@ -231,8 +225,9 @@ export const Add = ({navigation} : RouterProps) => {
                     ></Button>
                     </View>
                 </View>
-            </ScrollView>
-        </View>
+            </View>
+        </ScrollView>
+        
     )
 }
 

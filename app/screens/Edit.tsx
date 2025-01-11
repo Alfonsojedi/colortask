@@ -2,13 +2,14 @@ import { View, Text, StyleSheet, Button, TextInput, Dimensions, Animated, Scroll
 import { NavigationProp } from '@react-navigation/native';
 import { fire_db } from '@/FirebaseConf';
 import {ref, set, update} from 'firebase/database';
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import DateTimePicker from 'react-native-ui-datepicker'
 import { Colores } from '@/constants/Colores';
 import User from '@/constants/User';
 import CheckboxList from '@/components/CheckboxList';
+import dayjs from 'dayjs'
 import { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { ColorPicker } from 'react-native-color-picker';
 
 interface RouterProps {
     navigation: NavigationProp<any, any>;
@@ -26,7 +27,29 @@ export const Edit = ({navigation} : RouterProps) => {
     const [selectDone, setSelectDone] = useState<string[]>([]);
     const [selectColors, setSelectColors] = useState<string[]>([]);
 
-    const dataEdit = () => {
+    const [time, setTime] = useState(dayjs())
+    const setDates = (date: React.SetStateAction<dayjs.Dayjs> | any) => {
+        
+        setDate(date.date.toLocaleString());
+        setTime(date.date);
+    }
+    const dataAddOn = () => {
+        set(ref(fire_db,User()+'/posts/'+name), {
+            name: name,
+            desc: desc,
+            done: done,
+            prior: prior,
+            colors: colors,
+            date: date,
+        });
+        setName('');
+        setDesc('');
+        setDone(false);
+        setPrior('');
+        setColors('');
+        setDate('');
+    }
+    const dataUpdateOn = () => {
         update(ref(fire_db,User()+'/posts/'+name), {
             name: name,
             desc: desc,
@@ -111,50 +134,97 @@ export const Edit = ({navigation} : RouterProps) => {
     ]
     return(
         <ScrollView contentContainerStyle={styles.container}>
-            <Text style={{fontSize: 40, fontWeight: 'bold'}}>Añadir tarea</Text>
-            <TextInput
-                placeholder='Nombre'
-                value={name}
-                onChangeText={(text) => setName(text)}
-                style={styles.input}
-            ></TextInput>
-            <TextInput
-                placeholder='Descripción'
-                value={desc}
-                onChangeText={(text) => setDesc(text)}
-                style={styles.input}
-            ></TextInput>
-            <TextInput
-                placeholder='Fecha (YYYY-MM-DD)'
-                value={date}
-                onChangeText={(text) => setDate(text)}
-                style={styles.input}
-            ></TextInput>
-            <Text style={styles.text}>¿Terminaste la tarea?</Text>
-            <CheckboxList
-                options={optDone} 
-                onPressCheckbox={pressedDone}
-                selectedOption={selectDone}
-            ></CheckboxList>
-            <Text style={styles.text}>¿Es urgente?</Text>
-            <CheckboxList
-                options={optPrior} 
-                onPressCheckbox={pressedUrgente}
-                selectedOption={selectPrior}
-            ></CheckboxList>
-            <Text style={styles.text}>¿Qué color quieres?</Text>
-            <CheckboxList
-                options={optColors} 
-                onPressCheckbox={pressedColors}
-                selectedOption={selectColors}
-            ></CheckboxList>
-            <Button
-                title='Añadir tarea'
-                onPress={dataEdit}
-                color={Colores.light.secondary}
-            ></Button>
-            <View style={{marginTop: 5}}>
-                <Button title='Abrir tareas' color={Colores.light.secondary} onPress={() => navigation.navigate('Tasks')}></Button>
+            <View style={{minHeight: '100%',backgroundColor: Colores.light.background}}>
+                <Text style={{fontSize: 30, fontWeight: 'bold', textAlign: 'center'}}>Editar tarea</Text>
+                <View style={{display: 'flex', alignItems: 'center'}}>
+                    <View style={{scaleY: 0.2, width: '75%', borderRadius: 20 ,backgroundColor: Colores.light.outlineLight}}>
+                        <DateTimePicker
+                            firstDayOfWeek={1}
+                            mode='single'
+                            date={time}
+                            weekDaysContainerStyle={{backgroundColor: Colores.light.secondary}}
+                            dayContainerStyle={{padding: 0}}
+                            todayContainerStyle={{borderColor: Colores.light.secondary}}
+                            todayTextStyle={{color: Colores.light.black, fontWeight: 'bold'}}
+                            selectedItemColor='#082'
+                            selectedTextStyle={{fontWeight: 'bold'}}
+                            calendarTextStyle={{lineHeight: 0}}
+                            height={220}
+                            headerTextStyle={{fontSize: 20, lineHeight: 0}}
+                            onChange={(date) => setDates(date)}
+                        />
+                    </View>
+                </View>
+                <View style={{display: 'flex', flexDirection: 'row', width: '90%', alignSelf: 'center'}}>
+                    <View style={{width: '40%',paddingEnd: 5}}>
+                        <Text style={styles.text}>Nombre</Text>
+                        <TextInput
+                            placeholder='Nombre'
+                            value={name}
+                            onChangeText={(text) => setName(text)}
+                            style={styles.input}
+                        ></TextInput>
+                    </View>
+                    <View style={{width: '60%'}}>
+                        <Text style={styles.text}>Descripción</Text>
+                        <TextInput
+                            placeholder='Descripción'
+                            value={desc}
+                            onChangeText={(text) => setDesc(text)}
+                            style={styles.input}
+                        ></TextInput>
+                    </View>
+                </View>
+                <View style={{flex: 1, flexDirection: 'row',  padding: 5,borderRadius: 10,backgroundColor: Colores.light.outlineLight}}>
+                    <View style={{display: 'flex', flexDirection: 'row', width: '45%', alignItems: 'center'}}>
+                        <View style={{width: '75%', alignItems: 'flex-end'}}>
+                            <Text style={styles.text}>¿Terminaste la tarea?</Text>
+                        </View>
+                        <CheckboxList
+                            options={optDone} 
+                            onPressCheckbox={pressedDone}
+                            selectedOption={selectDone}
+                        ></CheckboxList>
+                    </View>
+                    <View style={{display: 'flex', flexDirection: 'row', width: '45%', alignItems: 'center'}}>
+                        <View style={{width: '75%', alignItems: 'flex-end'}}>
+                            <Text style={styles.text}>¿Es urgente?</Text>
+                        </View>
+                        <CheckboxList
+                            options={optPrior} 
+                            onPressCheckbox={pressedUrgente}
+                            selectedOption={selectPrior}
+                        ></CheckboxList>
+                    </View>
+                </View>
+                <View style={{display: 'flex', flexDirection: 'row'}}>
+                    <View style={{width: '40%', alignItems: 'flex-end'}}>
+                        <Text style={styles.text}>¿Qué color quieres?</Text>
+                    </View>
+                    <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                    <CheckboxList
+                        options={optColors} 
+                        onPressCheckbox={pressedColors}
+                        selectedOption={selectColors}
+                    ></CheckboxList>
+                    </View>
+                </View>
+                <View style={{ display: 'flex', flexDirection: 'row', alignSelf: 'center'}}>
+                    <View style={{padding: 5}}>
+                        <Button
+                            title='Actualizar tarea'
+                            onPress={dataUpdateOn}
+                            color={Colores.light.warning}
+                        ></Button>
+                    </View>
+                    <View style={{padding: 5}}>
+                    <Button
+                        title='Abrir tareas'
+                        color={Colores.light.secondary} 
+                        onPress={() => navigation.navigate('Tasks')}
+                    ></Button>
+                    </View>
+                </View>
             </View>
         </ScrollView>
     )
@@ -164,10 +234,9 @@ export default Edit;
 
 const styles =  StyleSheet.create({
     container: {
-      flex: 1,
       backgroundColor: Colores.light.background,
-      justifyContent: 'center',
-      alignItems: 'center',
+      padding: 10,
+      minHeight: '100%',
     },
     input: {
         marginVertical: 4,
