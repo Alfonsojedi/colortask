@@ -1,19 +1,16 @@
 import { fire_auth, fire_db } from '@/FirebaseConf';
 import { onValue, ref, remove, set } from 'firebase/database';
 import { useEffect, useState } from 'react';
-import { View, Image, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Image, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Colores } from '@/constants/Colores';
 import ColorBox from './ColorBox';
 import { TaskText } from './TaskText';
 import User from '@/constants/User';
 import Checkbox from '@/components/Checkbox';
-import { NavigationProp } from '@react-navigation/native';
 import { SinTareas } from './SinTareas';
 import CheckboxList from './CheckboxList';
 import { taskStyle } from '@/constants/taskStyle';
-import { DateType } from 'react-native-ui-datepicker';
 import React from 'react';
-import {format} from 'date-fns';
 
 function eliminar(index: string){
     remove(ref(fire_db,User()+'/posts/'+index))
@@ -26,7 +23,7 @@ const ColorPick = (colores='#999') => {
         borderRadius: 10,
         borderColor: Colores.light.outline,
         borderWidth: 2,
-        marginTop: 5,
+        marginBottom: 10,
     })
 }
 function order(a: Object,b: Object){
@@ -112,7 +109,6 @@ export function Task(){
                     return(<View></View>)
                 }
             })}
-            <View style={{height: 15}}></View>
         </ScrollView>
     )
 }

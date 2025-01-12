@@ -10,9 +10,9 @@ export function SinTareas() {
 }
 const styles = StyleSheet.create({
     noItems: {
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: Colores.light.background,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: Colores.light.background,
     },
 })

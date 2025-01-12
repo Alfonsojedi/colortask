@@ -8,8 +8,8 @@ const Boxer = (color: string) => {
         borderColor: Colores.light.outline,
         borderWidth: 3,
         flexDirection: 'row',
-        width: 24,
-        height: 24,
+        width: 20,
+        height: 20,
         marginRight: 5,
     })
 }
@@ -17,7 +17,7 @@ interface coloresProps {
     colores: (string | Array<string>);
 }
 export function ColorBox({colores}: coloresProps){
-    if(typeof colores === 'string'){
+    if(typeof colores==='string'){
         colores = [colores];
     }
     return(

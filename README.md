@@ -4,16 +4,21 @@ Crea una cuenta para entrar en la app. (Necesitarás un correo electrónico)
 Crea tareas con colores personalizables.
 
 ## Por terminar
-Editar, borrar y mostrar datos de la base de datos
+Botón de edición en cada tarjeta
 Añadir soporte de múltiples colores
+Checkbox de la vista de tareas muestra todas como completadas
 
 ## Instalación
 - > git clone https://github.com/Alfonsojedi/colortask
 - > cd colortask
 - > npx expo start
 - Esperar a que cargue y elige la versión de la app que quieras usar. (Web presiona 'w')
-Asegúrate de tener instalado npm / npx préviamente
+- En caso de un error usa:
+- > yarn add expo
+- > npx expo start
+Asegúrate de tener instalado npm / npx / yarn préviamente.
 
+- No se recomienda actualizar las dependencias del proyecto
 ## Autor
 Hecho por @Alfonsojedi
 <!--
