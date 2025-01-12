@@ -5,15 +5,15 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'fire
 import { Colores } from '@/constants/Colores';
 
 const Login = () => {
+  const auth = fire_auth;
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
   const [loading,setLoading] = useState(false);
-  const auth = fire_auth;
   const [errorMsg,setErrorMsg] = useState<any>('');
   const signIn = async () => {
     setLoading(true);
     try{
-      const response = await signInWithEmailAndPassword(auth,email,password);
+      await signInWithEmailAndPassword(auth,email,password);
     }catch (error){
       console.log(error);
       setErrorMsg('Hubo un error al entrar. Compruebe sus datos:\n'+error);
@@ -34,35 +34,47 @@ const Login = () => {
   }
   return(
   <View style={styles.container}>
-    <KeyboardAvoidingView behavior='padding'>
-    <Text style={styles.title}>Colortask</Text>
-    <TextInput value={email} style={styles.input} placeholder='E-mail' onChangeText={(text) => setEmail(text)}></TextInput>
-    <TextInput secureTextEntry={true} value={password} style={styles.input} placeholder='Contraseña' autoCapitalize='none' onChangeText={(text) => setPassword(text)}></TextInput>
-    <Text style={{color: Colores.light.danger, fontWeight: 'bold'}}>{errorMsg}</Text>
-    {loading ? 
-      <ActivityIndicator size="large" color={Colores.light.secondary}></ActivityIndicator>
-      :
-      <>
-        <View style={{marginBottom: 5}}>
-          <Button title='Acceder' color={Colores.light.secondary} onPress={signIn}></Button>
-        </View>
-        <View style={{marginBottom: 5}}>
-          <Button title='Regístrate' color={Colores.light.secondary} onPress={signUp}></Button>
-        </View>
-      </>}
-    </KeyboardAvoidingView>
+    <View style={styles.box}>
+      <KeyboardAvoidingView behavior='padding'>
+        <Text style={styles.title}>Colortask</Text>
+        <Text style={styles.subtitle}>2025</Text>
+        <Text style={{fontWeight: 'bold'}}>Correo:</Text>
+        <TextInput value={email} style={styles.input} placeholder='E-mail' onChangeText={(text) => setEmail(text)}></TextInput>
+        <Text style={{fontWeight: 'bold'}}>Contraseña:</Text>
+        <TextInput secureTextEntry={true} value={password} style={styles.input} placeholder='Contraseña' autoCapitalize='none' onChangeText={(text) => setPassword(text)}></TextInput>
+        <Text style={{color: Colores.light.danger, fontWeight: 'bold'}}>{errorMsg}</Text>
+        {loading ? 
+          <ActivityIndicator size="large" color={Colores.light.secondary}></ActivityIndicator>
+          :
+          <>
+            <View style={{marginBottom: 5}}>
+              <Button title='Acceder' color={Colores.light.secondary} onPress={signIn}></Button>
+            </View>
+            <View style={{marginBottom: 5}}>
+              <Button title='Regístrate' color={Colores.light.secondary} onPress={signUp}></Button>
+            </View>
+          </>}
+      </KeyboardAvoidingView>
+    </View>
   </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 20,
+    paddingHorizontal: 20,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '95%',
     backgroundColor: Colores.light.background,
+  },
+  box: {
+    borderWidth: 3,
+    borderColor: Colores.light.secondary,
+    borderRadius: 10,
+    backgroundColor:  Colores.light.outlineLight,
+    padding: 20,
+    minWidth: '40%',
   },
   input: {
     marginVertical: 4,
@@ -81,6 +93,12 @@ const styles = StyleSheet.create({
     color: Colores.light.secondary,
     fontWeight: 'bold',
     fontSize: 40,
+    textAlign: 'center',
+  },
+  subtitle: {
+    color: Colores.light.outline,
+    fontWeight: 'bold',
+    fontSize: 20,
     textAlign: 'center',
   },
 });
