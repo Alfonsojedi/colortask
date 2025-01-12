@@ -10,11 +10,16 @@ import CheckboxList from '@/components/CheckboxList';
 import dayjs from 'dayjs'
 import { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { format } from 'date-fns';
 
 interface RouterProps {
     navigation: NavigationProp<any, any>;
 }
-
+function fechaWriter(date: string){
+    let fecha = new Date(date)
+    let fechaPro = format(fecha, "dd/MM/yyyy");
+    return fechaPro
+}
 export const Add = ({navigation} : RouterProps) => {
     const [name,setName] = useState('');
     const [desc,setDesc] = useState('');
@@ -30,7 +35,7 @@ export const Add = ({navigation} : RouterProps) => {
     const [time, setTime] = useState(dayjs())
     const setDates = (date: React.SetStateAction<dayjs.Dayjs> | any) => {
         
-        setDate(date.date.toLocaleString());
+        setDate(fechaWriter(date.date.toLocaleString()));
         setTime(date.date);
     }
     const dataAddOn = () => {

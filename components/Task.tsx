@@ -13,14 +13,10 @@ import CheckboxList from './CheckboxList';
 import { taskStyle } from '@/constants/taskStyle';
 import { DateType } from 'react-native-ui-datepicker';
 import React from 'react';
-
+import {format} from 'date-fns';
 
 function eliminar(index: string){
     remove(ref(fire_db,User()+'/posts/'+index))
-}
-function fechaWriter(date: string){
-    let fecha
-    return fecha
 }
 const ColorPick = (colores='#999') => {
     return ({
@@ -93,7 +89,7 @@ export function Task(){
                                 <ColorBox colores={tasks.colors}></ColorBox>
                             </View>
                             <TaskText stroke={1} color='#fff8'>
-                                <Text style={{fontSize: 20,color: Colores.light.black}}>{tasks.date}</Text>
+                                <Text style={{fontSize: 18,color: Colores.light.black}}>{tasks.date}</Text>
                             </TaskText>
                             <TaskText stroke={1} color='#fff8'>
                                 <Text style={{fontSize: 24,color: Colores.light.black}}>{tasks.name}</Text>
@@ -102,7 +98,7 @@ export function Task(){
                                 <Text style={{fontSize: 14,color: Colores.light.black}}>{tasks.desc}</Text>
                             </TaskText>
                             <TaskText stroke={1} color='#0008'>
-                                <Text style={tasks.prior==='Urgente'?{fontSize: 24,color: Colores.light.danger}:{fontSize: 16,color: Colores.light.white}}>{tasks.prior}</Text>
+                                <Text style={tasks.prior==='Urgente'?{fontSize: 20,color: Colores.light.danger}:{fontSize: 14,color: Colores.light.white}}>{tasks.prior}</Text>
                             </TaskText>
                         </View>
                         <View style={taskStyle.taskButtons}>
