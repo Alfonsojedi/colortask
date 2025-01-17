@@ -9,6 +9,7 @@ Añadir soporte de múltiples colores
 Checkbox de la vista de tareas muestra todas como completadas
 
 ## Instalación
+Abre tu terminal y escribe:
 - > git clone https://github.com/Alfonsojedi/colortask
 - > cd colortask
 - > npx expo start
