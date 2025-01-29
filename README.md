@@ -17,7 +17,8 @@ Abre tu terminal y escribe:
 - En caso de un error usa:
 - > yarn add expo
 - > npx expo start
-Asegúrate de tener instalado npm / npx / yarn préviamente.
+Asegúrate de tener instalado npm / npx / yarn en tu terminal préviamente.
+(Si no los tienes, busca en su dpocumentación cómo instalarlos en tu OS)
 
 - No se recomienda actualizar las dependencias del proyecto
 ## Autor
