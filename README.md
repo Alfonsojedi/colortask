@@ -23,6 +23,7 @@ Asegúrate de tener instalado npm / npx / yarn en tu terminal préviamente.
 - No se recomienda actualizar las dependencias del proyecto
 ## Autor
 Hecho por @Alfonsojedi
+(Proyecto de FCT)
 <!--
 # Welcome to your Expo app 👋
 
